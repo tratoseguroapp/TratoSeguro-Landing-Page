@@ -1727,6 +1727,16 @@
     height: 72px;
   }
 
+  /* Agranda solo la imagen (transform no altera el layout): la card y los
+     textos no se mueven, la ilustración llena mejor su espacio. */
+  .problema-header-icon {
+    transform: scale(1.4);
+  }
+
+  .problema-card:hover .problema-card-icon-img {
+    transform: none;
+  }
+
   .problema-title {
     font-size: 21px;
   }
@@ -1755,6 +1765,10 @@
   .problema-card-icon-img {
     width: 60px;
     height: 60px;
+  }
+
+  .problema-header-icon {
+    transform: scale(1.45);
   }
 
   .problema-title {
@@ -3310,11 +3324,62 @@ body.ts-modal-lock {
 
   .ts-form {
     padding: 28px 22px;
+    gap: 16px;
+  }
+
+  /* Dentro del modal, esta regla gana en especificidad sobre el padding de
+     escritorio (.ts-modal .ts-form) que dejaba demasiado espacio en blanco. */
+  .ts-modal .ts-form {
+    padding: 26px 20px 24px;
+    gap: 16px;
+  }
+
+  /* Menos aire alrededor del diálogo: aprovecha el ancho de la pantalla */
+  .ts-modal {
+    padding: 14px;
+  }
+
+  .ts-modal-dialog {
+    max-width: 100%;
+    max-height: calc(100vh - 28px);
+    border-radius: 20px;
+  }
+
+  .ts-modal-close {
+    top: 14px;
+    right: 14px;
+    width: 34px;
+    height: 34px;
+  }
+
+  /* Título: punto más pequeño y alineado a la 1ª línea cuando el texto se parte */
+  .ts-form-title {
+    align-items: flex-start;
+    padding-left: 20px;
+    font-size: 21px;
+    line-height: 1.2;
+  }
+
+  .ts-form-title::before,
+  .ts-form-title::after {
+    top: 5px;
+    width: 11px;
+    height: 11px;
+  }
+
+  .ts-form-message {
+    font-size: 14px;
+    margin-top: -4px;
   }
 
   .ts-flex {
     flex-direction: column;
-    gap: 18px;
+    gap: 16px;
+  }
+
+  .ts-q {
+    font-size: 14.5px;
+    margin-bottom: 8px;
   }
 }
 
@@ -3324,7 +3389,11 @@ body.ts-modal-lock {
   }
 
   .ts-form-title {
-    font-size: 23px;
+    font-size: 20px;
+  }
+
+  .ts-modal-dialog {
+    max-height: 94vh;
   }
 }
 
