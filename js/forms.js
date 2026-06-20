@@ -31,6 +31,7 @@
      ============================================= */
 
   let lastFocused = null;
+  let successTimer = null; /* cancela el auto-cierre si el usuario cierra antes */
 
   /* Muestra el formulario correcto dentro del modal */
   const setForm = (target) => {
@@ -58,12 +59,23 @@
 
   const closeModal = () => {
     if (!modal) return;
+    /* Cancela cualquier auto-cierre pendiente de la pantalla de éxito */
+    if (successTimer !== null) { clearTimeout(successTimer); successTimer = null; }
     modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('ts-modal-lock');
     closeAllDropdowns();
     if (lastFocused && typeof lastFocused.focus === 'function') {
       try { lastFocused.focus({ preventScroll: true }); } catch (_) { /* noop */ }
+    }
+    /* Si el modal se cierra con la pantalla de éxito visible (cierre manual),
+       restaura los formularios después de que la animación de cierre termine. */
+    const successScreen = document.getElementById('ts-success-screen');
+    if (successScreen && successScreen.classList.contains('is-visible')) {
+      setTimeout(() => {
+        successScreen.classList.remove('is-visible');
+        [formComprador, formProveedor].forEach((f) => f.classList.remove('is-hidden'));
+      }, 350);
     }
   };
 
@@ -323,14 +335,13 @@
           successScreen.classList.remove('is-visible');
           void successScreen.offsetWidth;
           successScreen.classList.add('is-visible');
-          /* Cierra después de 1.2 s (check 0.55 s + texto 0.7 s + pausa) */
-          setTimeout(() => {
+          /* Cierra después de 2.5 s (check 0.55 s + texto 0.7 s + pausa).
+             Se guarda en successTimer para poder cancelarlo si el usuario
+             cierra el modal antes de que se cumpla el tiempo. */
+          successTimer = setTimeout(() => {
+            successTimer = null;
+            /* closeModal ya maneja la restauración cuando success está visible */
             closeModal();
-            /* Restaura formularios para la próxima apertura */
-            setTimeout(() => {
-              successScreen.classList.remove('is-visible');
-              [formComprador, formProveedor].forEach((f) => f.classList.remove('is-hidden'));
-            }, 350); /* espera a que el modal termine de cerrar */
           }, 2500);
         } else {
           closeModal();

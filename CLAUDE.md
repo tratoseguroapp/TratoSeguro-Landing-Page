@@ -818,7 +818,7 @@ Estas decisiones están tomadas. No se reabren sin instrucción explícita del f
 
 ---
 
-*Versión 1.6 — Junio 2026*
+*Versión 1.7 — Junio 2026*
 *Fundador: Andrés Vielma | Startup: TratoSeguro | Dominio: tratoseguro.app*
 
 ---
@@ -850,6 +850,9 @@ Estas decisiones están tomadas. No se reabren sin instrucción explícita del f
 
 ### Navbar mobile
 - Menú hamburguesa colapsa los 3 links en un **dropdown compacto** anclado a la **derecha**: `width: 190px`, `position: absolute; top: calc(100% + 10px); right: 0; left: auto`. No ocupa todo el ancho de pantalla. Se abre/cierra con JS (clase `.is-open`).
+- **Logo reducido a `height: 24px`** en mobile (vs 30px en desktop). Con el ratio ~5.8:1 del logo, 30px generaba ~173px de ancho que desbordaba el pill y empujaba el hamburguesa fuera. A 24px (~138px ancho) todo cabe holgado.
+- **Pill más compacta:** padding del wrapper `.navbar` bajó a `10px 14px` (vs `16px 24px`). `.navbar-inner` baja a `min-height: 52px` (vs 76px) y padding `8px 10px 8px 16px`.
+- **Hide-on-scroll:** Al hacer scroll hacia abajo más de 90px el navbar se oculta (`top: -120px` con `transition: top 0.35s ease`). Al hacer scroll hacia arriba vuelve inmediatamente. El menú hamburguesa se cierra automáticamente si el navbar se oculta. Solo aplica en mobile; en desktop el navbar siempre es visible. Implementado en `navigation.js` con `lastScrollY` tracking y clase `.is-hidden`.
 
 ### Hero mobile
 **Layout:** Todo apilado y centrado en columna. Orden con `order`: pill (1) → imagen Lottie (2) → grupo de texto (3).
@@ -876,6 +879,11 @@ Grid **2×2** por fila (compradores y proveedores): `grid-template-columns: repe
 ### Formularios mobile
 Cards de acceso centradas con `max-width: 360px`, apiladas en columna, `padding: 22px`, botones con `font-size: 14px; padding: 13px 24px`.
 
+**Modal en mobile:** El override `.ts-modal .ts-form { padding: 26px 20px 24px }` en el breakpoint `≤768px` es necesario para ganar especificidad sobre el padding de escritorio `44px 38px 38px` — sin ese override, el formulario dentro del modal conserva el padding gigante de desktop en iPhone. El modal se reduce a `padding: 14px` y `max-width: 100%`. El título del formulario baja a `font-size: 21px` con `align-items: flex-start` y el punto pulsante se achica a `11×11px` anclado en `top: 5px` para que no quede flotando en medio cuando el título se parte en dos líneas.
+
+### El Problema mobile — ilustraciones
+Las imágenes de las cards de El Problema en mobile se agrandan visualmente con `transform: scale(1.4)` en `≤768px` y `scale(1.45)` en `≤480px` sobre `.problema-header-icon`. El contenedor (`.problema-card-icon-img`) mantiene sus dimensiones (72px / 60px), así que el layout y los textos no se mueven — solo la imagen crece visualmente dentro de su espacio.
+
 ### Footer mobile (`@media max-width: 768px`)
 `.founders-grid` reduce gap a 10px. Cards bajan a `max-width: 160px` para caber lado a lado.
 
@@ -884,8 +892,14 @@ Cards de acceso centradas con `max-width: 360px`, apiladas en columna, `padding:
 
 ---
 
+- **Favicons — COMPLETO** (jun 2026). Seis archivos en `assets/images/`: `favicon.ico`, `favicon-16x16.png`, `favicon-32x32.png`, `apple-touch-icon.png`, `android-chrome-192x192.png`, `android-chrome-512x512.png`. Generados en favicon.io. El `site.webmanifest` vive en la raíz del proyecto y apunta a los dos íconos Android Chrome. El `<head>` incluye los 4 `<link>` de favicon + el link al manifest. Diseño: fondo azul `#0759FC` con ícono handshake blanco.
+- **Bugs corregidos** (jun 2026):
+  - Radio buttons sin `value` en ambos formularios: 16 `<input type="radio">` de los campos opcionales (experiencia_pago, prob_adopcion, experiencia_cobro, prob_plataforma) no tenían atributo `value` — el navegador enviaba `"on"` a Formspree y el label del dropdown mostraba `"on"`. Corregido agregando `value="texto de la opción"` a cada radio.
+  - Race condition en la pantalla de éxito: el timer de auto-cierre del modal (2.5s) seguía corriendo si el usuario cerraba el modal manualmente, pudiendo cerrar el modal si lo reabría antes. Corregido con `successTimer` que `closeModal()` cancela via `clearTimeout`. Además `closeModal` detecta si la pantalla de éxito está visible y restaura los formularios directamente, sin depender del timer.
+
+---
+
 **Pendiente:**
 - Bloque 5: Cierre (sección de email de espera antes del footer)
 - `robots.txt` y `sitemap.xml`
-- LinkedIn de Salvatore Berticci: reemplazar el `href="https://linkedin.com"` placeholder en su founder card con la URL real de su perfil
 - Links legales del footer: reemplazar los `href="#"` de Términos, Privacidad y Soporte cuando existan las páginas correspondientes
