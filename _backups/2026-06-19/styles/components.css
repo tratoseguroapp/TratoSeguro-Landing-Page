@@ -1,0 +1,92 @@
+/* =============================================
+   BOTONES
+   ============================================= */
+
+.btn-primary,
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-primary);
+  font-size: var(--text-body);
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  padding: 14px 24px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+/* --- Primario --- */
+.btn-primary {
+  background: var(--blue-600);
+  color: #fff;
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-primary:hover {
+  background: var(--blue-700);
+  transform: scale(1.02);
+  box-shadow: 0 4px 16px rgba(7, 89, 252, 0.35);
+}
+
+.btn-primary:active {
+  background: var(--blue-800);
+  transform: scale(0.99);
+}
+
+/* --- Outline --- */
+.btn-outline {
+  background: #231F20;
+  color: #FFFFFF;
+  border: 2px solid #231F20;
+  /* Compensar los 2px de borde para igualar la altura del primario */
+  padding: 12px 22px;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.btn-outline:hover {
+  background: #2e2a2b;
+  border-color: #2e2a2b;
+  transform: scale(1.02);
+}
+
+.btn-outline:active {
+  transform: scale(0.99);
+}
+
+/* =============================================
+   PILL (con punto pulsante)
+   ============================================= */
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-secondary);
+  font-size: 14px;
+  font-weight: var(--weight-label);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--blue-700);
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--blue-50) 0%, var(--blue-100) 100%);
+  border: 1px solid var(--blue-200);
+}
+
+.pill-dot {
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  background: var(--blue-600);
+  border-radius: 50%;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.4; transform: scale(0.85); }
+}

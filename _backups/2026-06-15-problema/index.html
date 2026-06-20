@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Base -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Marca JS activo cuanto antes: el CSS solo oculta los elementos a animar
+       si existe la clase .js, así que sin JS la página se ve completa (no en blanco). -->
+  <script>document.documentElement.classList.add('js');</script>
+  <title>TratoSeguro — El marketplace mayorista de Venezuela</title>
+  <meta name="description" content="Comprá y vendé al mayor con pago protegido, proveedores verificados y seguimiento de envíos en un solo lugar. El marketplace B2B que Venezuela necesitaba.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://tratoseguro.app">
+
+  <!-- Open Graph (WhatsApp, Instagram, LinkedIn, Facebook) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tratoseguro.app">
+  <meta property="og:title" content="TratoSeguro — El marketplace mayorista de Venezuela">
+  <meta property="og:description" content="Comprá y vendé al mayor con pago protegido, proveedores verificados y seguimiento de envíos en un solo lugar.">
+  <meta property="og:image" content="https://tratoseguro.app/assets/images/og-image.webp">
+  <meta property="og:locale" content="es_VE">
+  <meta property="og:site_name" content="TratoSeguro">
+
+  <!-- Twitter/X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TratoSeguro — El marketplace mayorista de Venezuela">
+  <meta name="twitter:description" content="Comprá y vendé al mayor con pago protegido, proveedores verificados y seguimiento de envíos.">
+  <meta name="twitter:image" content="https://tratoseguro.app/assets/images/og-image.webp">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/sections.css">
+  <!-- Lottie player -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+</head>
+<body>
+
+  <!-- =========================================================
+       BLOQUE 0 — NAVBAR
+       ========================================================= -->
+  <header class="navbar" id="navbar">
+    <nav class="navbar-inner" aria-label="Navegación principal">
+
+      <!-- Zona izquierda: logo -->
+      <a class="navbar-brand" href="#hero" aria-label="TratoSeguro — Inicio">
+        <img class="navbar-logo" src="assets/images/logo-tratoseguro.webp" alt="TratoSeguro">
+      </a>
+
+      <!-- Zona central: links de navegación -->
+      <ul class="navbar-links" id="navbar-links">
+        <li><a href="#hero">Cómo funciona</a></li>
+        <li><a href="#beneficios">Beneficios</a></li>
+        <li><a href="#formularios">Únete</a></li>
+      </ul>
+
+      <!-- Zona derecha: CTA + toggle mobile -->
+      <div class="navbar-actions">
+        <a class="btn-primary navbar-cta" href="#formularios">
+          Registrarme
+          <span class="arrow-wrapper"><span class="arrow"></span></span>
+        </a>
+        <button class="navbar-toggle" id="navbar-toggle" type="button"
+                aria-label="Abrir menú" aria-expanded="false" aria-controls="navbar-links">
+          <span class="navbar-toggle-bar"></span>
+          <span class="navbar-toggle-bar"></span>
+          <span class="navbar-toggle-bar"></span>
+        </button>
+      </div>
+
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- =========================================================
+         BLOQUE 1 — HERO
+         ========================================================= -->
+    <section class="hero" id="hero">
+      <div class="hero-inner">
+
+        <!-- Fila superior: texto a la izquierda + imagen a la derecha -->
+        <div class="hero-top">
+
+          <!-- Columna izquierda: texto -->
+          <div class="hero-content">
+
+            <!-- Pill con punto pulsante -->
+            <span class="pill animate-on-scroll" style="transition-delay: 0s;">
+              <span class="pill-dot"></span>
+              PRÓXIMAMENTE...
+            </span>
+
+            <!-- Headline -->
+            <h1 class="hero-headline animate-on-scroll" style="transition-delay: 0.12s;">La plataforma mayorista que Venezuela necesitaba.</h1>
+
+            <!-- Subtítulo -->
+            <p class="hero-subtitle animate-on-scroll" style="transition-delay: 0.22s;">
+              No más grupos de WhatsApp y tratos sin garantía. TratoSeguro
+              conecta compradores y vendedores mayoristas con verificación real, pago
+              protegido y seguimiento de envíos en un solo lugar.
+            </p>
+
+            <!-- CTAs -->
+            <div class="hero-ctas animate-on-scroll" style="transition-delay: 0.3s;">
+              <a class="btn-primary" href="#form-comprador">Soy comprador →</a>
+              <a class="btn-outline" href="#form-proveedor">Soy proveedor →</a>
+            </div>
+
+          </div>
+
+          <!-- Columna derecha: animación Lottie -->
+          <div class="hero-image animate-on-scroll" style="transition-delay: 0.12s;">
+            <div id="anim-hero" class="hero-image-img"></div>
+          </div>
+
+        </div>
+
+        <!-- Diagrama de flujo serpentina (6 pasos), a todo el ancho debajo -->
+        <div class="hero-visual">
+          <div class="hero-flow">
+
+<span class="flow-label animate-on-scroll">Así de simple funciona</span>
+
+            <ol class="flow-grid" aria-label="Cómo funciona TratoSeguro en 6 pasos">
+
+              <!-- Paso 1 -->
+              <li class="flow-node animate-on-scroll" style="transition-delay: 0s;">
+                <span class="conn-glow conn-glow-h conn-glow-1" aria-hidden="true"></span>
+                <div class="flow-card">
+                  <div class="flow-media">
+                    <span class="flow-imgwrap">
+                      <img class="flow-img" src="assets/images/ilustracion-encuentra-proveedor.webp" alt="Comprador buscando un proveedor">
+                      <span class="flow-num">1</span>
+                    </span>
+                  </div>
+                  <h3 class="flow-title">Encuentra tu proveedor</h3>
+                  <p class="flow-desc">Busca por categoría, precio y volumen. Compara proveedores verificados con historial real.</p>
+                </div>
+              </li>
+
+              <!-- Paso 2 -->
+              <li class="flow-node animate-on-scroll" style="transition-delay: 0.1s;">
+                <span class="conn-glow conn-glow-h conn-glow-2" aria-hidden="true"></span>
+                <div class="flow-card">
+                  <div class="flow-media">
+                    <span class="flow-imgwrap">
+                      <img class="flow-img" src="assets/images/ilustracion-acuerda-condiciones.webp" alt="Comprador y vendedor acordando condiciones">
+                      <span class="flow-num">2</span>
+                    </span>
+                  </div>
+                  <h3 class="flow-title">Acuerda las condiciones</h3>
+                  <p class="flow-desc">Negocia volumen, precio y método de envío. Todo queda registrado en la plataforma.</p>
+                </div>
+              </li>
+
+              <!-- Paso 3 -->
+              <li class="flow-node animate-on-scroll" style="transition-delay: 0.2s;">
+                <span class="conn-glow conn-glow-v conn-glow-3" aria-hidden="true"></span>
+                <div class="flow-card">
+                  <div class="flow-media">
+                    <span class="flow-imgwrap">
+                      <img class="flow-img" src="assets/images/ilustracion-paga-seguridad.webp" alt="Pago protegido en escrow">
+                      <span class="flow-num">3</span>
+                    </span>
+                  </div>
+                  <h3 class="flow-title">Paga con total seguridad</h3>
+                  <p class="flow-desc">Tu pago va a TratoSeguro, no al vendedor. Queda retenido hasta que confirmes la entrega.</p>
+                </div>
+              </li>
+
+              <!-- Paso 4 -->
+              <li class="flow-node animate-on-scroll" style="transition-delay: 0.2s;">
+                <div class="flow-card">
+                  <div class="flow-media">
+                    <span class="flow-imgwrap">
+                      <img class="flow-img" src="assets/images/ilustracion-vendedor-prepara-despacha.webp" alt="Vendedor preparando el despacho">
+                      <span class="flow-num">4</span>
+                    </span>
+                  </div>
+                  <h3 class="flow-title">El vendedor prepara y despacha</h3>
+                  <p class="flow-desc">Con el pago confirmado, el vendedor coordina el envío por el método acordado.</p>
+                </div>
+              </li>
+
+              <!-- Paso 5 -->
+              <li class="flow-node animate-on-scroll" style="transition-delay: 0.1s;">
+                <span class="conn-glow conn-glow-h conn-glow-4" aria-hidden="true"></span>
+                <div class="flow-card">
+                  <div class="flow-media">
+                    <span class="flow-imgwrap">
+                      <img class="flow-img" src="assets/images/ilustracion-mantente-informado.webp" alt="Comprador siguiendo el estado del pedido">
+                      <span class="flow-num">5</span>
+                    </span>
+                  </div>
+                  <h3 class="flow-title">Mantente informado</h3>
+                  <p class="flow-desc">Recibe actualizaciones del estado de tu pedido hasta que llegue a tus manos.</p>
+                </div>
+              </li>
+
+              <!-- Paso 6 -->
+              <li class="flow-node animate-on-scroll" style="transition-delay: 0s;">
+                <span class="conn-glow conn-glow-h conn-glow-5" aria-hidden="true"></span>
+                <div class="flow-card">
+                  <div class="flow-media">
+                    <span class="flow-imgwrap">
+                      <img class="flow-img" src="assets/images/ilustacion-confirmas-trato-completa.webp" alt="Comprador confirmando la entrega">
+                      <span class="flow-num">6</span>
+                    </span>
+                  </div>
+                  <h3 class="flow-title">Confirmas y se completa</h3>
+                  <p class="flow-desc">Recibes tu pedido, confirmas la entrega y TratoSeguro libera el pago al vendedor.</p>
+                </div>
+              </li>
+
+            </ol>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================
+         ZONA OSCURA — Ticker + El Problema + Beneficios
+         (fondo continuo #070714, sin líneas divisoras internas)
+         ========================================================= -->
+    <div class="dark-zone">
+
+    <!-- =========================================================
+         TICKER — FRASES EN MOVIMIENTO
+         ========================================================= -->
+    <section class="ticker" id="ticker" aria-label="Características de TratoSeguro">
+
+      <!-- Fila 1: se mueve a la izquierda (4 sets × 6 pills = siempre cubre cualquier pantalla) -->
+      <div class="ticker-row ticker-row--left">
+        <div class="ticker-track">
+          <span class="ticker-pill">Deja de comprar a ciegas</span>
+          <span class="ticker-pill">Pago protegido</span>
+          <span class="ticker-pill">Tracking en tiempo real</span>
+          <span class="ticker-pill">Proveedores verificados</span>
+          <span class="ticker-pill">Sin riesgo de estafa</span>
+          <span class="ticker-pill">Trato garantizado</span>
+          <span class="ticker-pill" aria-hidden="true">Deja de comprar a ciegas</span>
+          <span class="ticker-pill" aria-hidden="true">Pago protegido</span>
+          <span class="ticker-pill" aria-hidden="true">Tracking en tiempo real</span>
+          <span class="ticker-pill" aria-hidden="true">Proveedores verificados</span>
+          <span class="ticker-pill" aria-hidden="true">Sin riesgo de estafa</span>
+          <span class="ticker-pill" aria-hidden="true">Trato garantizado</span>
+          <span class="ticker-pill" aria-hidden="true">Deja de comprar a ciegas</span>
+          <span class="ticker-pill" aria-hidden="true">Pago protegido</span>
+          <span class="ticker-pill" aria-hidden="true">Tracking en tiempo real</span>
+          <span class="ticker-pill" aria-hidden="true">Proveedores verificados</span>
+          <span class="ticker-pill" aria-hidden="true">Sin riesgo de estafa</span>
+          <span class="ticker-pill" aria-hidden="true">Trato garantizado</span>
+          <span class="ticker-pill" aria-hidden="true">Deja de comprar a ciegas</span>
+          <span class="ticker-pill" aria-hidden="true">Pago protegido</span>
+          <span class="ticker-pill" aria-hidden="true">Tracking en tiempo real</span>
+          <span class="ticker-pill" aria-hidden="true">Proveedores verificados</span>
+          <span class="ticker-pill" aria-hidden="true">Sin riesgo de estafa</span>
+          <span class="ticker-pill" aria-hidden="true">Trato garantizado</span>
+        </div>
+      </div>
+
+      <!-- Fila 2: se mueve a la derecha (4 sets × 6 pills) -->
+      <div class="ticker-row ticker-row--right">
+        <div class="ticker-track">
+          <span class="ticker-pill">Marketplace B2B</span>
+          <span class="ticker-pill">Venezuela mayorista</span>
+          <span class="ticker-pill">Historial verificado</span>
+          <span class="ticker-pill">Sin grupos de WhatsApp</span>
+          <span class="ticker-pill">Escrow automático</span>
+          <span class="ticker-pill">Compradores reales</span>
+          <span class="ticker-pill" aria-hidden="true">Marketplace B2B</span>
+          <span class="ticker-pill" aria-hidden="true">Venezuela mayorista</span>
+          <span class="ticker-pill" aria-hidden="true">Historial verificado</span>
+          <span class="ticker-pill" aria-hidden="true">Sin grupos de WhatsApp</span>
+          <span class="ticker-pill" aria-hidden="true">Escrow automático</span>
+          <span class="ticker-pill" aria-hidden="true">Compradores reales</span>
+          <span class="ticker-pill" aria-hidden="true">Marketplace B2B</span>
+          <span class="ticker-pill" aria-hidden="true">Venezuela mayorista</span>
+          <span class="ticker-pill" aria-hidden="true">Historial verificado</span>
+          <span class="ticker-pill" aria-hidden="true">Sin grupos de WhatsApp</span>
+          <span class="ticker-pill" aria-hidden="true">Escrow automático</span>
+          <span class="ticker-pill" aria-hidden="true">Compradores reales</span>
+          <span class="ticker-pill" aria-hidden="true">Marketplace B2B</span>
+          <span class="ticker-pill" aria-hidden="true">Venezuela mayorista</span>
+          <span class="ticker-pill" aria-hidden="true">Historial verificado</span>
+          <span class="ticker-pill" aria-hidden="true">Sin grupos de WhatsApp</span>
+          <span class="ticker-pill" aria-hidden="true">Escrow automático</span>
+          <span class="ticker-pill" aria-hidden="true">Compradores reales</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- =========================================================
+         BLOQUE 2 — EL PROBLEMA
+         ========================================================= -->
+    <section class="problema" id="problema">
+      <div class="problema-inner">
+
+        <!-- Header de sección: título izquierda + subtítulo derecha -->
+        <header class="problema-header animate-on-scroll" style="transition-delay: 0s;">
+          <h2 class="problema-heading">Así funciona el comercio mayorista en Venezuela hoy.</h2>
+          <p class="problema-subheading"><span class="hl">4 problemas reales</span> que frenan cada transacción antes de que empiece.</p>
+        </header>
+
+        <!-- Rejilla 2×2: blancas (1,4) y negras (2,3) en diagonal -->
+        <div class="problema-grid">
+
+          <!-- 1 · Blanca -->
+          <article class="problema-card problema-card--light animate-on-scroll">
+            <div class="problema-text">
+              <h3 class="problema-title">Nadie sabe<br>cuánto vale nada</h3>
+              <p class="problema-desc">El precio lo decide el vendedor según quién pregunta. Sin referencia de mercado, siempre pagas de más o vendes de menos.</p>
+            </div>
+            <div class="problema-media">
+              <img class="problema-img" src="assets/images/ilustacion-nadie-sabe-vale-nada.webp"
+                   alt="Ilustración: nadie sabe cuánto vale un producto" loading="lazy">
+            </div>
+          </article>
+
+          <!-- 2 · Negra -->
+          <article class="problema-card problema-card--dark animate-on-scroll">
+            <div class="problema-text">
+              <h3 class="problema-title">Transferir es<br>confiar a ciegas</h3>
+              <p class="problema-desc">Mandar $ a alguien de un grupo de WhatsApp requiere una fe que muchos no están dispuestos a tener. Y tienen razón.</p>
+            </div>
+            <div class="problema-media">
+              <img class="problema-img" src="assets/images/ilustacion-transferir-confiar-ciegas.webp"
+                   alt="Ilustración: transferir dinero es confiar a ciegas" loading="lazy">
+            </div>
+          </article>
+
+          <!-- 3 · Negra -->
+          <article class="problema-card problema-card--dark animate-on-scroll">
+            <div class="problema-text">
+              <h3 class="problema-title">Tu proveedor existe,<br>pero no te encuentra</h3>
+              <p class="problema-desc">El conocimiento comercial está atrapado en redes personales. Si no conoces a alguien que conozca a alguien, la oportunidad no llega.</p>
+            </div>
+            <div class="problema-media">
+              <img class="problema-img" src="assets/images/ilustacion-proveedor-comprador-existe-no-encuentra.webp"
+                   alt="Ilustración: tu proveedor existe pero no te encuentra" loading="lazy">
+            </div>
+          </article>
+
+          <!-- 4 · Blanca -->
+          <article class="problema-card problema-card--light animate-on-scroll">
+            <div class="problema-text">
+              <h3 class="problema-title">El paquete salió.<br>¿Llegará?</h3>
+              <p class="problema-desc">Sin un sistema centralizado de seguimiento, la incertidumbre sobre la entrega es parte del trato. Y esa incertidumbre frena la siguiente compra.</p>
+            </div>
+            <div class="problema-media">
+              <img class="problema-img" src="assets/images/ilustacion-paquete-salio-llegara.webp"
+                   alt="Ilustración: el paquete salió pero no se sabe si llegará" loading="lazy">
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         BLOQUE 3 — BENEFICIOS
+         ========================================================= -->
+    <section class="beneficios" id="beneficios">
+      <div class="beneficios-inner">
+
+        <!-- Header de sección: título izquierda + subtítulo derecha -->
+        <header class="beneficios-header animate-on-scroll" style="transition-delay: 0s;">
+          <h2 class="beneficios-heading">Algunos beneficios de<br>usar <span class="beneficios-brand">TratoSeguro</span></h2>
+        </header>
+
+        <!-- Grupo compradores: 4 cards flotantes -->
+        <div class="beneficios-group animate-on-scroll" style="transition-delay: 0s;">
+          <div class="beneficios-group-head">
+            <span class="beneficios-group-label">Para compradores</span>
+            <p class="beneficios-subheading">Lo que ganan <span class="hl">compradores y proveedores</span><br>cuando cada trato deja de ser un riesgo.</p>
+          </div>
+          <div class="beneficios-row">
+
+            <article class="benefit-card">
+              <span class="benefit-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 11.5V4.5a1.5 1.5 0 0 1 1.5-1.5h7a2 2 0 0 1 1.42.59l7 7a2 2 0 0 1 0 2.82l-6.6 6.6a2 2 0 0 1-2.82 0l-7-7A2 2 0 0 1 3 11.5Z"/>
+                  <circle cx="7.5" cy="7.5" r="1.5"/>
+                </svg>
+              </span>
+              <h4 class="benefit-card-title">Precios visibles y comparables</h4>
+              <p class="benefit-card-desc">Ve múltiples proveedores en un solo lugar antes de decidir.</p>
+            </article>
+
+            <article class="benefit-card">
+              <span class="benefit-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3 5 6v5c0 4.5 3 7.6 7 9 4-1.4 7-4.5 7-9V6l-7-3Z"/>
+                  <path d="m9 12 2 2 4-4"/>
+                </svg>
+              </span>
+              <h4 class="benefit-card-title">Tu dinero protegido</h4>
+              <p class="benefit-card-desc">Pagas solo cuando confirmas que tu pedido llegó bien.</p>
+            </article>
+
+            <article class="benefit-card">
+              <span class="benefit-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3.4c.86-.87 2.3-.87 3.16 0l.5.5c.4.4.96.64 1.54.64h.7c1.2 0 2.2 1 2.2 2.2v.7c0 .58.23 1.13.64 1.54l.5.5c.87.86.87 2.3 0 3.16l-.5.5c-.41.4-.64.96-.64 1.54v.7c0 1.2-1 2.2-2.2 2.2h-.7c-.58 0-1.13.23-1.54.64l-.5.5c-.86.87-2.3.87-3.16 0l-.5-.5a2.2 2.2 0 0 0-1.54-.64h-.7c-1.2 0-2.2-1-2.2-2.2v-.7c0-.58-.23-1.13-.64-1.54l-.5-.5a2.24 2.24 0 0 1 0-3.16l.5-.5c.41-.41.64-.96.64-1.54v-.7c0-1.2 1-2.2 2.2-2.2h.7c.58 0 1.13-.23 1.54-.64l.5-.5Z"/>
+                  <path d="m9.2 12 1.9 1.9 3.7-3.8"/>
+                </svg>
+              </span>
+              <h4 class="benefit-card-title">Proveedores con historial real</h4>
+              <p class="benefit-card-desc">Compra a vendedores verificados con reputación ganada transacción a transacción.</p>
+            </article>
+
+            <article class="benefit-card">
+              <span class="benefit-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 21s7-5.5 7-11a7 7 0 0 0-14 0c0 5.5 7 11 7 11Z"/>
+                  <circle cx="12" cy="10" r="2.5"/>
+                </svg>
+              </span>
+              <h4 class="benefit-card-title">Seguimiento centralizado</h4>
+              <p class="benefit-card-desc">El estado de tu pedido en un solo lugar, sin llamadas ni incertidumbre.</p>
+            </article>
+
+          </div>
+        </div>
+
+        <!-- Grupo proveedores: 4 cards flotantes -->
+        <div class="beneficios-group animate-on-scroll" style="transition-delay: 0.1s;">
+          <div class="beneficios-group-head">
+            <span class="beneficios-group-label">Para proveedores</span>
+          </div>
+          <div class="beneficios-row">
+
+            <article class="benefit-card">
+              <span class="benefit-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="9" cy="8" r="3"/>
+                  <path d="M3.5 19v-1.2A3.8 3.8 0 0 1 7.3 14h3.4a3.8 3.8 0 0 1 3.8 3.8V19"/>
+                  <path d="M16 5.3a3 3 0 0 1 0 5.4"/>
+                  <path d="M17 14.2a3.8 3.8 0 0 1 3 3.6V19"/>
+                </svg>
+              </span>
+              <h4 class="benefit-card-title">Acceso a compradores nuevos</h4>
+              <p class="benefit-card-desc">Llega a clientes que nunca encontrarías solo a través de tu red personal.</p>
+            </article>
+
+            <article class="benefit-card">
+              <span class="benefit-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 7.5A1.5 1.5 0 0 1 4.5 6H17a2 2 0 0 1 2 2v.5"/>
+                  <path d="M3 7.5V17a2 2 0 0 0 2 2h13a2 2 0 0 0 2-2v-2.5"/>
+                  <path d="M21 10.5v4h-3.5a2 2 0 0 1 0-4H21Z"/>
+                </svg>
+              </span>
+              <h4 class="benefit-card-title">Cobro garantizado</h4>
+              <p class="benefit-card-desc">Despachas sabiendo que tu pago ya está asegurado en la plataforma.</p>
+            </article>
+
+            <article class="benefit-card">
+              <span class="benefit-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m12 3.5 2.6 5.27 5.82.85-4.21 4.1.99 5.79L12 16.77 6.8 19.5l.99-5.79-4.21-4.1 5.82-.85L12 3.5Z"/>
+                </svg>
+              </span>
+              <h4 class="benefit-card-title">Reputación que se acumula</h4>
+              <p class="benefit-card-desc">Cada entrega exitosa construye tu historial verificado dentro de la plataforma.</p>
+            </article>
+
+            <article class="benefit-card">
+              <span class="benefit-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 8.5V7a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v1.5a2 2 0 0 0 0 7V17a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1.5a2 2 0 0 0 0-7Z"/>
+                  <path d="M14 6.5v3M14 14.5v3"/>
+                </svg>
+              </span>
+              <h4 class="benefit-card-title">Sin costo de entrada</h4>
+              <p class="benefit-card-desc">Te registras gratis y pagas solo cuando vendes.</p>
+            </article>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    </div><!-- /.dark-zone -->
+
+    <!-- =========================================================
+         BLOQUE 4 — FORMULARIOS DE REGISTRO
+         ========================================================= -->
+    <section class="formularios" id="formularios">
+
+      <!-- Íconos decorativos gigantes en el fondo de la sección -->
+      <svg class="formularios-bg-icon formularios-bg-icon--left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M3 4h2l1.5 12.5a1.5 1.5 0 0 0 1.5 1.3h9a1.5 1.5 0 0 0 1.48-1.22L20 8H6"/>
+        <circle cx="9.5" cy="20.5" r="1.2"/>
+        <circle cx="17" cy="20.5" r="1.2"/>
+      </svg>
+      <svg class="formularios-bg-icon formularios-bg-icon--right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 9.5 5.2 5a1.5 1.5 0 0 1 1.45-1.1h10.7A1.5 1.5 0 0 1 18.8 5L20 9.5"/>
+        <path d="M4 9.5h16v1.2a2.4 2.4 0 0 1-4.8 0 2.4 2.4 0 0 1-4.8 0 2.4 2.4 0 0 1-4.8 0Z"/>
+        <path d="M5.5 12.8V19a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-6.2"/>
+      </svg>
+
+      <div class="formularios-inner">
+
+        <header class="formularios-header animate-on-scroll" style="transition-delay: 0s;">
+          <h2 class="formularios-heading">¿Eres <span class="formularios-brand">comprador</span> o <span class="formularios-brand">proveedor</span>?</h2>
+          <p class="formularios-subheading">Elige tu perfil y cuéntanos más sobre ti. Te avisamos apenas TratoSeguro abra sus puertas.</p>
+        </header>
+
+        <!-- Selector: dos cards de acceso con botón grande -->
+        <div class="acceso-grid animate-on-scroll" style="transition-delay: 0.1s;">
+
+          <article class="acceso-card">
+            <span class="acceso-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 4h2l1.5 12.5a1.5 1.5 0 0 0 1.5 1.3h9a1.5 1.5 0 0 0 1.48-1.22L20 8H6"/>
+                <circle cx="9.5" cy="20.5" r="1.2"/>
+                <circle cx="17" cy="20.5" r="1.2"/>
+              </svg>
+            </span>
+            <h3 class="acceso-title">Entra aquí si eres comprador</h3>
+            <p class="acceso-sub">Compra al mayor con pago protegido y proveedores verificados.</p>
+            <button type="button" class="acceso-btn acceso-btn--blue" id="btn-comprador" data-target="comprador">Soy comprador</button>
+          </article>
+
+          <article class="acceso-card">
+            <span class="acceso-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 9.5 5.2 5a1.5 1.5 0 0 1 1.45-1.1h10.7A1.5 1.5 0 0 1 18.8 5L20 9.5"/>
+                <path d="M4 9.5h16v1.2a2.4 2.4 0 0 1-4.8 0 2.4 2.4 0 0 1-4.8 0 2.4 2.4 0 0 1-4.8 0Z"/>
+                <path d="M5.5 12.8V19a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-6.2"/>
+              </svg>
+            </span>
+            <h3 class="acceso-title">Entra aquí si eres vendedor</h3>
+            <p class="acceso-sub">Llega a compradores nuevos y cobra con total garantía.</p>
+            <button type="button" class="acceso-btn acceso-btn--dark" id="btn-proveedor" data-target="proveedor">Soy proveedor</button>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================
+       BLOQUE 5 — FOOTER
+       ========================================================= -->
+  <footer class="site-footer" id="footer">
+    <div class="footer-inner">
+
+      <!-- Fila superior: marca + columnas de enlaces + social -->
+      <div class="footer-top">
+
+        <!-- Marca -->
+        <div class="footer-brand">
+          <img class="footer-logo" src="assets/images/logo-tratoseguro.webp" alt="TratoSeguro">
+          <p class="footer-tagline">El marketplace mayorista de Venezuela.</p>
+          <nav class="footer-legal" aria-label="Legal">
+            <a href="#">Términos y condiciones</a>
+            <a href="#">Política de privacidad</a>
+            <a href="#">Soporte</a>
+          </nav>
+        </div>
+
+        <!-- Columna: Fundador -->
+        <div class="footer-col">
+          <h3 class="footer-col-title footer-col-title--founder">Fundador</h3>
+          <div class="founder-card">
+            <img class="founder-photo" src="assets/images/rostro-andres.webp" alt="Andrés Vielma, CEO y Fundador de TratoSeguro">
+            <div class="founder-info">
+              <div class="founder-text">
+                <p class="founder-name">Andrés Vielma</p>
+                <p class="founder-role">CEO &amp; Fundador</p>
+              </div>
+              <a class="founder-li-btn" href="https://www.linkedin.com/in/andres-vielma-61486b387" target="_blank" rel="noopener" aria-label="LinkedIn de Andrés Vielma">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                  <rect width="4" height="12" x="2" y="9"/>
+                  <circle cx="4" cy="4" r="2"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna: Síguenos -->
+        <div class="footer-col">
+          <h3 class="footer-col-title">Síguenos</h3>
+          <div class="footer-social">
+            <!-- Instagram -->
+            <a class="footer-social-link" href="https://instagram.com/tratoseguro" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </svg>
+            </a>
+            <!-- LinkedIn -->
+            <a class="footer-social-link" href="https://linkedin.com/company/tratoseguro" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                <rect width="4" height="12" x="2" y="9"/>
+                <circle cx="4" cy="4" r="2"/>
+              </svg>
+            </a>
+            <!-- Threads -->
+            <a class="footer-social-link" href="https://threads.net/@tratoseguro" target="_blank" rel="noopener" aria-label="Threads">
+              <svg viewBox="0 0 448 512" width="20" height="20" fill="currentColor" aria-hidden="true">
+                <path d="M331.5 235.7c2.2.9 4.2 1.9 6.3 2.8c29.2 14.1 50.6 35.2 61.8 61.4c15.7 36.5 17.2 95.8-30.3 143.2c-36.2 36.2-80.3 52.5-142.6 53h-.3c-70.2-.5-124.1-24.1-160.4-70.2c-32.3-41-48.9-98.1-49.5-169.6V256v-.2C17 184.3 33.6 127.2 65.9 86.2C102.2 40.1 156.2 16.5 226.4 16h.3c70.3.5 124.9 24 162.3 69.9c18.4 22.7 32 50 40.6 81.7l-40.4 10.8C380.2 154.2 369.4 132 354.1 113c-28.4-33.4-69.7-51.4-122.5-51.9c-55.2.5-97.8 18.7-127 54.1c-26.1 32.1-39.9 78.3-40.4 137.4v.4c.5 59.1 14.3 105.3 40.4 137.4c29.2 35.4 71.8 53.6 127 54.1c52 .4 91.8-12.3 120.2-38.7c30.7-28.5 35.7-63.5 33.6-86.4c-2.6-26.1-11.7-44.8-27.5-58.5c-3.5 22.8-11.9 43.5-25.6 61c-19.5 25.3-48 38.5-84.8 39.3c-28.9.7-57.6-9.8-76.8-27.5c-21-19.3-31-46.5-28.6-75.2c4.7-55.4 48.7-89.6 117.8-90.4h2.3c36.8 0 65.2 10.3 84.5 30.6c15.1 16 22.2 36.2 23 60.3c2.4-1 4.7-2.1 6.9-3.2zm-31.7 51.1c-.9-17.9-6.4-31.8-16.6-41.6c-12-11.1-30.2-16.8-54.1-16.8l-1.9 0c-45.5.5-68.9 20.2-71.6 53c-1.7 21.3 7.4 40.1 33.4 43.6c7 1 14.1 1.1 21.1.3c26.7-3 49.8-19.5 60.2-53.2c1.7-5.4 3-10.9 3.9-16.3c-3.7 4.9-6 10.2-7 15.1z"/>
+              </svg>
+            </a>
+          </div>
+          <!-- Contacto -->
+          <h3 class="footer-col-title footer-col-title--sub">Contacto</h3>
+          <a class="footer-email-link" href="mailto:formularios@tratoseguro.app">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="M2 7l10 7 10-7"/>
+            </svg>
+            formularios@tratoseguro.app
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Barra inferior: copyright + tagline -->
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 TratoSeguro. Todos los derechos reservados.</p>
+        <p class="footer-made">Hecho en Venezuela, para el comercio mayorista de Venezuela.</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- =========================================================
+       MODAL — Formularios de registro (ventana emergente)
+       ========================================================= -->
+  <div class="ts-modal" id="form-modal" aria-hidden="true">
+    <div class="ts-modal-backdrop" data-close></div>
+    <div class="ts-modal-dialog" role="dialog" aria-modal="true" aria-label="Formulario de registro">
+      <button type="button" class="ts-modal-close" data-close aria-label="Cerrar formulario">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+
+      <!-- ===== Pantalla de éxito ===== -->
+      <div class="ts-success-screen" id="ts-success-screen" aria-live="polite">
+        <div class="ts-success-circle">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+            <path class="ts-check-path" d="M8 18.5l7 7 13-13" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <p class="ts-success-title">¡Registro enviado!</p>
+        <p class="ts-success-sub">Te avisamos en cuanto TratoSeguro abra sus puertas.</p>
+      </div>
+
+          <!-- ===== Formulario COMPRADOR ===== -->
+          <form class="ts-form" id="form-comprador" data-tipo="comprador" novalidate>
+            <p class="ts-form-title">Registro de comprador</p>
+            <p class="ts-form-message">Cuéntanos qué compras y cómo. Toma menos de un minuto.</p>
+
+            <input type="hidden" name="tipo" value="Comprador">
+
+            <div class="ts-flex">
+              <label class="float-field">
+                <input class="float-input" name="nombre" type="text" placeholder=" " required>
+                <span>Nombre</span>
+              </label>
+              <label class="float-field">
+                <input class="float-input" name="email" type="email" placeholder=" " required>
+                <span>Correo electrónico</span>
+              </label>
+            </div>
+
+            <fieldset class="ts-field" data-required="true">
+              <legend class="ts-q">¿Qué tipo de productos sueles comprar al mayor? <span class="req">*</span></legend>
+              <div class="ts-select" data-type="multi" data-placeholder="Selecciona una o más categorías" data-otro-prompt="Cuéntanos qué sueles comprar">
+                <button type="button" class="ts-select-trigger" aria-haspopup="listbox" aria-expanded="false">
+                  <span class="ts-select-label">Selecciona una o más categorías</span>
+                  <svg class="ts-select-arrow" width="14" height="9" viewBox="0 0 14 9" fill="none" aria-hidden="true"><path d="M1 1.5l6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <div class="ts-select-panel" role="listbox" aria-multiselectable="true">
+                  <label class="ts-option"><input type="checkbox" name="productos[]" value="Alimentos"><span class="ts-option-check"></span><span class="ts-option-text">Alimentos</span></label>
+                  <label class="ts-option"><input type="checkbox" name="productos[]" value="Electrónica y accesorios"><span class="ts-option-check"></span><span class="ts-option-text">Electrónica y accesorios</span></label>
+                  <label class="ts-option"><input type="checkbox" name="productos[]" value="Ropa y calzado"><span class="ts-option-check"></span><span class="ts-option-text">Ropa y calzado</span></label>
+                  <label class="ts-option"><input type="checkbox" name="productos[]" value="Materiales de construcción"><span class="ts-option-check"></span><span class="ts-option-text">Materiales de construcción</span></label>
+                  <label class="ts-option"><input type="checkbox" name="productos[]" value="Productos de belleza"><span class="ts-option-check"></span><span class="ts-option-text">Productos de belleza</span></label>
+                  <label class="ts-option"><input type="checkbox" name="productos[]" value="Repuestos"><span class="ts-option-check"></span><span class="ts-option-text">Repuestos</span></label>
+                  <label class="ts-option"><input type="checkbox" name="productos[]" value="Otro"><span class="ts-option-check"></span><span class="ts-option-text">Otro</span></label>
+                </div>
+              </div>
+              <div class="ts-otro-wrap" hidden>
+                <input type="text" name="productos_otro" class="ts-otro-input" placeholder="Cuéntanos qué sueles comprar" autocomplete="off">
+              </div>
+              <p class="ts-error" data-error></p>
+            </fieldset>
+
+            <fieldset class="ts-field" data-required="true">
+              <legend class="ts-q">¿Con qué frecuencia compras al mayor? <span class="req">*</span></legend>
+              <div class="ts-select" data-type="single" data-placeholder="Selecciona una opción">
+                <button type="button" class="ts-select-trigger" aria-haspopup="listbox" aria-expanded="false">
+                  <span class="ts-select-label">Selecciona una opción</span>
+                  <svg class="ts-select-arrow" width="14" height="9" viewBox="0 0 14 9" fill="none" aria-hidden="true"><path d="M1 1.5l6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <div class="ts-select-panel" role="listbox">
+                  <label class="ts-option"><input type="radio" name="frecuencia" value="Cada semana"><span class="ts-option-check"></span><span class="ts-option-text">Cada semana</span></label>
+                  <label class="ts-option"><input type="radio" name="frecuencia" value="Cada quince días"><span class="ts-option-check"></span><span class="ts-option-text">Cada quince días</span></label>
+                  <label class="ts-option"><input type="radio" name="frecuencia" value="Una vez al mes"><span class="ts-option-check"></span><span class="ts-option-text">Una vez al mes</span></label>
+                  <label class="ts-option"><input type="radio" name="frecuencia" value="Cada dos meses"><span class="ts-option-check"></span><span class="ts-option-text">Cada dos meses</span></label>
+                  <label class="ts-option"><input type="radio" name="frecuencia" value="Cada tres meses"><span class="ts-option-check"></span><span class="ts-option-text">Cada tres meses</span></label>
+                  <label class="ts-option"><input type="radio" name="frecuencia" value="Cada seis meses"><span class="ts-option-check"></span><span class="ts-option-text">Cada seis meses</span></label>
+                  <label class="ts-option"><input type="radio" name="frecuencia" value="Una vez al año"><span class="ts-option-check"></span><span class="ts-option-text">Una vez al año</span></label>
+                  <label class="ts-option"><input type="radio" name="frecuencia" value="Según lo necesito"><span class="ts-option-check"></span><span class="ts-option-text">Según lo necesito</span></label>
+                </div>
+              </div>
+              <p class="ts-error" data-error></p>
+            </fieldset>
+
+            <fieldset class="ts-field">
+              <legend class="ts-q">¿Cuánto sueles gastar por compra al mayor? <span class="opt">(opcional)</span></legend>
+              <div class="ts-select" data-type="single" data-placeholder="Selecciona una opción">
+                <button type="button" class="ts-select-trigger" aria-haspopup="listbox" aria-expanded="false">
+                  <span class="ts-select-label">Selecciona una opción</span>
+                  <svg class="ts-select-arrow" width="14" height="9" viewBox="0 0 14 9" fill="none" aria-hidden="true"><path d="M1 1.5l6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <div class="ts-select-panel" role="listbox">
+                  <label class="ts-option"><input type="radio" name="gasto" value="Menos de $100"><span class="ts-option-check"></span><span class="ts-option-text">Menos de $100</span></label>
+                  <label class="ts-option"><input type="radio" name="gasto" value="$100–$500"><span class="ts-option-check"></span><span class="ts-option-text">$100–$500</span></label>
+                  <label class="ts-option"><input type="radio" name="gasto" value="$500–$2.000"><span class="ts-option-check"></span><span class="ts-option-text">$500–$2.000</span></label>
+                  <label class="ts-option"><input type="radio" name="gasto" value="Más de $2.000"><span class="ts-option-check"></span><span class="ts-option-text">Más de $2.000</span></label>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="ts-field" data-required="true">
+              <legend class="ts-q">¿Cómo buscas proveedores hoy? <span class="req">*</span></legend>
+              <div class="ts-select" data-type="multi" data-placeholder="Selecciona una o más opciones">
+                <button type="button" class="ts-select-trigger" aria-haspopup="listbox" aria-expanded="false">
+                  <span class="ts-select-label">Selecciona una o más opciones</span>
+                  <svg class="ts-select-arrow" width="14" height="9" viewBox="0 0 14 9" fill="none" aria-hidden="true"><path d="M1 1.5l6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <div class="ts-select-panel" role="listbox" aria-multiselectable="true">
+                  <label class="ts-option"><input type="checkbox" name="busqueda[]" value="Grupos de WhatsApp"><span class="ts-option-check"></span><span class="ts-option-text">Grupos de WhatsApp</span></label>
+                  <label class="ts-option"><input type="checkbox" name="busqueda[]" value="Facebook Marketplace"><span class="ts-option-check"></span><span class="ts-option-text">Facebook Marketplace</span></label>
+                  <label class="ts-option"><input type="checkbox" name="busqueda[]" value="Referidos"><span class="ts-option-check"></span><span class="ts-option-text">Referidos</span></label>
+                  <label class="ts-option"><input type="checkbox" name="busqueda[]" value="Instagram"><span class="ts-option-check"></span><span class="ts-option-text">Instagram</span></label>
+                  <label class="ts-option"><input type="checkbox" name="busqueda[]" value="Otro"><span class="ts-option-check"></span><span class="ts-option-text">Otro</span></label>
+                </div>
+              </div>
+              <p class="ts-error" data-error></p>
+            </fieldset>
+
+            <button class="ts-submit" type="submit">Enviar</button>
+            <p class="ts-form-status" data-status aria-live="polite"></p>
+          </form>
+
+          <!-- ===== Formulario PROVEEDOR ===== -->
+          <form class="ts-form is-hidden" id="form-proveedor" data-tipo="proveedor" novalidate>
+            <p class="ts-form-title">Registro de proveedor</p>
+            <p class="ts-form-message">Cuéntanos qué vendes y cómo operas. Toma menos de un minuto.</p>
+
+            <input type="hidden" name="tipo" value="Proveedor">
+
+            <div class="ts-flex">
+              <label class="float-field">
+                <input class="float-input" name="nombre" type="text" placeholder=" " required>
+                <span>Nombre</span>
+              </label>
+              <label class="float-field">
+                <input class="float-input" name="email" type="email" placeholder=" " required>
+                <span>Correo electrónico</span>
+              </label>
+            </div>
+
+            <fieldset class="ts-field" data-required="true">
+              <legend class="ts-q">¿Qué tipo de productos vendes al mayor? <span class="req">*</span></legend>
+              <div class="ts-select" data-type="multi" data-placeholder="Selecciona una o más categorías" data-otro-prompt="Cuéntanos qué sueles vender">
+                <button type="button" class="ts-select-trigger" aria-haspopup="listbox" aria-expanded="false">
+                  <span class="ts-select-label">Selecciona una o más categorías</span>
+                  <svg class="ts-select-arrow" width="14" height="9" viewBox="0 0 14 9" fill="none" aria-hidden="true"><path d="M1 1.5l6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <div class="ts-select-panel" role="listbox" aria-multiselectable="true">
+                  <label class="ts-option"><input type="checkbox" name="productos[]" value="Alimentos"><span class="ts-option-check"></span><span class="ts-option-text">Alimentos</span></label>
+                  <label class="ts-option"><input type="checkbox" name="productos[]" value="Electrónica y accesorios"><span class="ts-option-check"></span><span class="ts-option-text">Electrónica y accesorios</span></label>
+                  <label class="ts-option"><input type="checkbox" name="productos[]" value="Ropa y calzado"><span class="ts-option-check"></span><span class="ts-option-text">Ropa y calzado</span></label>
+                  <label class="ts-option"><input type="checkbox" name="productos[]" value="Materiales de construcción"><span class="ts-option-check"></span><span class="ts-option-text">Materiales de construcción</span></label>
+                  <label class="ts-option"><input type="checkbox" name="productos[]" value="Productos de belleza"><span class="ts-option-check"></span><span class="ts-option-text">Productos de belleza</span></label>
+                  <label class="ts-option"><input type="checkbox" name="productos[]" value="Repuestos"><span class="ts-option-check"></span><span class="ts-option-text">Repuestos</span></label>
+                  <label class="ts-option"><input type="checkbox" name="productos[]" value="Otro"><span class="ts-option-check"></span><span class="ts-option-text">Otro</span></label>
+                </div>
+              </div>
+              <div class="ts-otro-wrap" hidden>
+                <input type="text" name="productos_otro" class="ts-otro-input" placeholder="Cuéntanos qué sueles vender" autocomplete="off">
+              </div>
+              <p class="ts-error" data-error></p>
+            </fieldset>
+
+            <fieldset class="ts-field">
+              <legend class="ts-q">¿Cuánto vendes aproximadamente al mes? <span class="opt">(opcional)</span></legend>
+              <div class="ts-select" data-type="single" data-placeholder="Selecciona una opción">
+                <button type="button" class="ts-select-trigger" aria-haspopup="listbox" aria-expanded="false">
+                  <span class="ts-select-label">Selecciona una opción</span>
+                  <svg class="ts-select-arrow" width="14" height="9" viewBox="0 0 14 9" fill="none" aria-hidden="true"><path d="M1 1.5l6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <div class="ts-select-panel" role="listbox">
+                  <label class="ts-option"><input type="radio" name="ventas_mes" value="Menos de $500"><span class="ts-option-check"></span><span class="ts-option-text">Menos de $500</span></label>
+                  <label class="ts-option"><input type="radio" name="ventas_mes" value="$500–$2.000"><span class="ts-option-check"></span><span class="ts-option-text">$500–$2.000</span></label>
+                  <label class="ts-option"><input type="radio" name="ventas_mes" value="$2.000–$10.000"><span class="ts-option-check"></span><span class="ts-option-text">$2.000–$10.000</span></label>
+                  <label class="ts-option"><input type="radio" name="ventas_mes" value="Más de $10.000"><span class="ts-option-check"></span><span class="ts-option-text">Más de $10.000</span></label>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="ts-field" data-required="true">
+              <legend class="ts-q">¿Cómo consigues compradores hoy? <span class="req">*</span></legend>
+              <div class="ts-select" data-type="multi" data-placeholder="Selecciona una o más opciones">
+                <button type="button" class="ts-select-trigger" aria-haspopup="listbox" aria-expanded="false">
+                  <span class="ts-select-label">Selecciona una o más opciones</span>
+                  <svg class="ts-select-arrow" width="14" height="9" viewBox="0 0 14 9" fill="none" aria-hidden="true"><path d="M1 1.5l6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <div class="ts-select-panel" role="listbox" aria-multiselectable="true">
+                  <label class="ts-option"><input type="checkbox" name="captacion[]" value="Grupos de WhatsApp"><span class="ts-option-check"></span><span class="ts-option-text">Grupos de WhatsApp</span></label>
+                  <label class="ts-option"><input type="checkbox" name="captacion[]" value="Instagram"><span class="ts-option-check"></span><span class="ts-option-text">Instagram</span></label>
+                  <label class="ts-option"><input type="checkbox" name="captacion[]" value="Referidos"><span class="ts-option-check"></span><span class="ts-option-text">Referidos</span></label>
+                  <label class="ts-option"><input type="checkbox" name="captacion[]" value="Facebook"><span class="ts-option-check"></span><span class="ts-option-text">Facebook</span></label>
+                  <label class="ts-option"><input type="checkbox" name="captacion[]" value="Otro"><span class="ts-option-check"></span><span class="ts-option-text">Otro</span></label>
+                </div>
+              </div>
+              <p class="ts-error" data-error></p>
+            </fieldset>
+
+            <fieldset class="ts-field">
+              <legend class="ts-q">¿Tienes RIF activo? <span class="opt">(opcional)</span></legend>
+              <div class="ts-select" data-type="single" data-placeholder="Selecciona una opción">
+                <button type="button" class="ts-select-trigger" aria-haspopup="listbox" aria-expanded="false">
+                  <span class="ts-select-label">Selecciona una opción</span>
+                  <svg class="ts-select-arrow" width="14" height="9" viewBox="0 0 14 9" fill="none" aria-hidden="true"><path d="M1 1.5l6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <div class="ts-select-panel" role="listbox">
+                  <label class="ts-option"><input type="radio" name="rif" value="Sí"><span class="ts-option-check"></span><span class="ts-option-text">Sí</span></label>
+                  <label class="ts-option"><input type="radio" name="rif" value="No"><span class="ts-option-check"></span><span class="ts-option-text">No</span></label>
+                  <label class="ts-option"><input type="radio" name="rif" value="En proceso"><span class="ts-option-check"></span><span class="ts-option-text">En proceso</span></label>
+                </div>
+              </div>
+            </fieldset>
+
+            <button class="ts-submit" type="submit">Enviar</button>
+            <p class="ts-form-status" data-status aria-live="polite"></p>
+          </form>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/navigation.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/forms.js"></script>
+
+  <!-- Animación hero -->
+  <script>
+    (function () {
+      // Frame donde termina la intro de "subida" y empieza el movimiento continuo.
+      // Ajustar este número si el corte se siente antes o después de lo ideal.
+      var LOOP_START = 30;
+
+      var anim = lottie.loadAnimation({
+        container: document.getElementById('anim-hero'),
+        renderer: 'svg',
+        loop: false,
+        autoplay: true,
+        path: 'assets/images/animacion-hero.json'
+      });
+
+      // Primera vez: corre la animación completa (intro incluida).
+      // Cada vez que termina: vuelve al frame LOOP_START, saltando la intro.
+      anim.addEventListener('complete', function () {
+        anim.goToAndPlay(LOOP_START, true);
+      });
+    })();
+  </script>
+
+</body>
+</html>

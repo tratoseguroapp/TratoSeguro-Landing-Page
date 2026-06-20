@@ -1,0 +1,2573 @@
+/* =============================================
+   BLOQUE 0 — NAVBAR (pill flotante)
+   ============================================= */
+
+/* Wrapper transparente: crea el "aire" alrededor de la pill flotante */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 16px 24px;
+  background: transparent;
+}
+
+/* La barra en sí: pill blanca redondeada con sombra suave */
+.navbar-inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 76px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 18px 12px 28px;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(226, 232, 240, 0.7);
+  border-radius: 20px;
+  box-shadow: 0 6px 24px rgba(10, 10, 20, 0.06);
+  transition: box-shadow 0.2s ease, background 0.3s ease;
+}
+
+/* Al hacer scroll, la sombra se intensifica y el fondo gana opacidad
+   para mantener los links legibles sobre la zona oscura. */
+.navbar.is-scrolled .navbar-inner {
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 10px 32px rgba(10, 10, 20, 0.12);
+}
+
+/* --- Zona izquierda: logo --- */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.navbar-logo {
+  height: 30px;   /* alto explícito; con la imagen ya recortada el wordmark llena todo el alto */
+  width: auto;    /* mantiene la proporción original (~5:1) */
+  display: block;
+}
+
+/* --- Zona central: links --- */
+.navbar-links {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 24px;   /* espacio prudente junto al logo */
+  margin-right: auto;  /* empuja las acciones (CTA) a la derecha */
+}
+
+/* Glider: la pill azul que se desliza entre los links.
+   Su posición/ancho/visibilidad los controla navigation.js vía variables. */
+.navbar-links::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: var(--glider-w, 0);
+  transform: translateX(var(--glider-x, 0));
+  background: var(--blue-50);
+  border-radius: 999px;
+  opacity: var(--glider-o, 0);
+  z-index: 0;
+  pointer-events: none;
+  transition: transform 0.25s ease-out, width 0.25s ease-out, opacity 0.2s ease;
+}
+
+.navbar-links a {
+  position: relative;
+  z-index: 1;   /* el texto queda por encima del glider */
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-primary);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--text-medium);
+  padding: 9px 16px;
+  border-radius: 999px;
+  transition: color 0.2s ease;
+}
+
+/* Hover y estado seleccionado: solo cambia el color del texto;
+   el fondo lo provee el glider que se desliza. */
+.navbar-links a:hover,
+.navbar-links a.active {
+  color: var(--blue-600);
+}
+
+/* --- Zona derecha: acciones --- */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* CTA Registrarme — botón con flecha animada (Uiverse) adaptado a la marca */
+.navbar-cta {
+  --arrow-width: 10px;
+  --arrow-stroke: 2px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 13px 26px;
+  border: 0;
+  border-radius: 16px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--blue-600);
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.navbar-cta .arrow-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-cta .arrow {
+  margin-top: 1px;
+  width: var(--arrow-width);
+  height: var(--arrow-stroke);
+  background: var(--blue-600); /* igual al fondo => la línea es invisible en reposo */
+  position: relative;
+  transition: 0.2s;
+}
+
+.navbar-cta .arrow::before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  top: -3px;
+  right: 3px;
+  display: inline-block;
+  padding: 3px;
+  border: solid #fff;
+  border-width: 0 var(--arrow-stroke) var(--arrow-stroke) 0;
+  transform: rotate(-45deg);
+  transition: 0.2s;
+}
+
+.navbar-cta:hover {
+  background: var(--blue-700);
+  transform: translateY(-2px);   /* leve elevación al pasar el mouse */
+  box-shadow: 0 6px 18px rgba(7, 89, 252, 0.30);
+}
+
+.navbar-cta:hover .arrow {
+  background: #fff;
+}
+
+.navbar-cta:hover .arrow::before {
+  right: 0;
+}
+
+/* --- Botón hamburguesa (oculto en desktop) --- */
+.navbar-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  border-radius: 10px;
+  transition: background 0.15s ease;
+}
+
+.navbar-toggle:hover {
+  background: var(--blue-50);
+}
+
+.navbar-toggle-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--text-dark);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* Animación a "X" cuando el menú está abierto */
+.navbar-toggle[aria-expanded="true"] .navbar-toggle-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.navbar-toggle[aria-expanded="true"] .navbar-toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar-toggle[aria-expanded="true"] .navbar-toggle-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* =============================================
+   NAVBAR — RESPONSIVE
+   ============================================= */
+
+@media (max-width: 768px) {
+
+  .navbar {
+    padding: 12px 16px;
+  }
+
+  .navbar-inner {
+    /* Volver a flex: en mobile los links salen del flujo (dropdown absoluto) */
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 12px 10px 20px;
+  }
+
+  /* Mostrar el botón hamburguesa (a la derecha del CTA) */
+  .navbar-toggle {
+    display: flex;
+  }
+
+  /* En mobile no hay glider deslizante (el menú es vertical) */
+  .navbar-links::before {
+    display: none;
+  }
+
+  /* Los links centrales se colapsan en un panel desplegable
+     anclado debajo de la pill */
+  .navbar-links {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 8px;
+    background: var(--bg-white);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: 0 10px 32px rgba(10, 10, 20, 0.12);
+
+    /* Oculto por defecto: el JS añade .is-open para mostrarlo */
+    transform-origin: top;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition: max-height 0.25s ease, opacity 0.2s ease, visibility 0.2s ease;
+  }
+
+  .navbar-links.is-open {
+    max-height: 320px;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .navbar-links a {
+    display: block;
+    padding: 14px 16px;
+    border-radius: 12px;
+    font-size: var(--text-body);
+  }
+
+  .navbar-links a:hover {
+    background: var(--blue-50);
+    color: var(--blue-600);
+  }
+}
+
+/* =============================================
+   BLOQUE 1 — HERO
+   ============================================= */
+
+.hero {
+  position: relative;
+  background: transparent;
+  overflow-x: clip;
+}
+
+/* Anillos concéntricos decorativos: pecan desde el borde superior derecho.
+   Creados con radial-gradient de paradas duras para anillos limpios.
+   pointer-events: none — no interfieren con ningún click. */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  right: -220px;
+  width: 780px;
+  height: 780px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center,
+    transparent 34%,
+    rgba(7, 89, 252, 0.07) 34.4%, rgba(7, 89, 252, 0.07) 35%,
+    transparent 35.4%,
+    transparent 48%,
+    rgba(7, 89, 252, 0.05) 48.3%, rgba(7, 89, 252, 0.05) 48.8%,
+    transparent 49.2%,
+    transparent 62%,
+    rgba(6, 182, 212, 0.04) 62.2%, rgba(6, 182, 212, 0.04) 62.6%,
+    transparent 63%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1200px;   /* mismo ancho que el navbar */
+  margin: 0 auto;
+  padding: 32px 24px 88px;
+}
+
+/* Fila superior: texto a la izquierda + imagen a la derecha */
+.hero-top {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  align-items: center;
+  gap: 48px;
+}
+
+/* Texto del hero: alineado a la izquierda */
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  max-width: 600px;
+}
+
+/* Columna derecha: imagen grande */
+.hero-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-image-img {
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 1 / 1;
+  display: block;
+  transform: scale(1.4) translateY(2%);
+  transform-origin: center center;
+}
+
+.hero-headline {
+  font-family: var(--font-primary);
+  /* Más grande y pesado, al estilo de la referencia: llena el espacio
+     y elimina la sensación "básica" de un titular pequeño con mucho aire. */
+  font-size: clamp(40px, 6.4vw, 68px);
+  font-weight: var(--weight-hero);
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  color: var(--text-dark);
+  margin-top: 20px;
+  max-width: 15em;
+  text-wrap: balance;   /* reparte el titular en líneas equilibradas */
+}
+
+.hero-subtitle {
+  font-family: var(--font-primary);
+  font-size: 19px;
+  font-weight: var(--weight-body);
+  line-height: 1.55;
+  color: var(--text-medium);
+  max-width: 520px;   /* angosto: envuelve a ~3 líneas, ritmo deliberado */
+  margin-top: 22px;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+/* Diagrama de flujo serpentina: a todo el ancho, debajo del texto */
+.hero-visual {
+  width: 100%;
+  margin-top: 36px;
+  padding-bottom: 56px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Contenedor que centra el diagrama (sin caja: flota sobre los puntos).
+   position relative para alojar la marca de agua de fondo. */
+.hero-flow {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.flow-label {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  background: #FFFFFF;
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 20px;
+  box-shadow: 0 4px 16px rgba(7, 89, 252, 0.10);
+  margin-bottom: 40px;
+  font-family: var(--font-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--blue-700);
+  text-align: center;
+}
+
+/* --- Grid serpentina: 3 columnas × 2 filas ---
+   Tarjetas anchas (texto legible) con gap fijo (necesario para que las
+   líneas conectoras tengan un ancho conocido). 3×290 + 2×140 = 1150. */
+.flow-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 290px));
+  justify-content: center;
+  column-gap: 140px;
+  row-gap: 56px;
+}
+
+/* Recorrido serpentina: fila superior 1→2→3 (izq. a der.); baja por la
+   derecha al 4; fila inferior 4→5→6 (der. a izq., el 4 queda bajo el 3). */
+.flow-node:nth-child(1) { grid-area: 1 / 1; }
+.flow-node:nth-child(2) { grid-area: 1 / 2; }
+.flow-node:nth-child(3) { grid-area: 1 / 3; }
+.flow-node:nth-child(4) { grid-area: 2 / 3; }
+.flow-node:nth-child(5) { grid-area: 2 / 2; }
+.flow-node:nth-child(6) { grid-area: 2 / 1; }
+
+/* El nodo es la celda estática del grid: NO se mueve y es dueño de las
+   líneas conectoras (pseudo-elementos), para que las líneas queden quietas
+   mientras la tarjeta de adentro flota. */
+.flow-node {
+  position: relative;
+  text-align: center;
+}
+
+/* La tarjeta-widget visual: fondo blanco, borde sutil y sombra suave
+   (inspirada en el recurso del fundador). Esta es la que FLOTA como una
+   sola pieza (imagen + texto + número se mueven juntos, estilo Bookevo).
+   El flotado anima la propiedad 'translate' para que componga con el
+   'scale' del hover sin que se peleen. */
+.flow-card {
+  position: relative;
+  z-index: 1;   /* siempre por encima de las líneas conectoras */
+  height: 100%;
+  background: var(--bg-white);
+  border-radius: 16px;
+  padding: 24px 22px 26px;
+  box-shadow:
+    inset 0 -2.4em 2.4em rgba(7, 89, 252, 0.035),
+    inset 0 0 0 1px rgba(7, 89, 252, 0.12),
+    inset 0 1px 1px rgba(7, 89, 252, 0.18),
+    0 0 14px rgba(7, 89, 252, 0.10),
+    0 0 0 1.5px var(--border),
+    0.3em 0.45em 1.1em rgba(10, 10, 20, 0.13);
+  animation: float-card 5s ease-in-out infinite;
+  transition: scale 0.18s ease, box-shadow 0.25s ease;
+}
+
+/* Hover: se agranda un poco (igual que los botones), se eleva sobre las
+   demás y se pausa el flotado para quedar en un estado limpio "levantado".
+   Como 'translate' no se resetea, no hay salto. */
+.flow-card:hover {
+  scale: 1.04;
+  z-index: 2;
+  animation-play-state: paused;
+  box-shadow:
+    inset 0 -2.4em 2.4em rgba(7, 89, 252, 0.06),
+    inset 0 0 0 1px rgba(7, 89, 252, 0.22),
+    inset 0 1px 1px rgba(7, 89, 252, 0.28),
+    0 0 22px rgba(7, 89, 252, 0.18),
+    0 0 0 1.5px var(--border-hover),
+    0.45em 0.85em 1.9em rgba(10, 10, 20, 0.20);
+}
+
+/* Flotado suave y sutil: la tarjeta sube y baja unos pocos px. */
+@keyframes float-card {
+  0%, 100% { translate: 0 0; }
+  50%      { translate: 0 -7px; }
+}
+
+/* Cada tarjeta flota con su propio ritmo y desfase, para un movimiento
+   orgánico (no todas a la vez). Las líneas no dependen de las tarjetas,
+   así que el flotado independiente no las afecta. */
+.flow-node:nth-child(1) .flow-card { animation-duration: 4.6s; animation-delay: -0.2s; }
+.flow-node:nth-child(2) .flow-card { animation-duration: 5.4s; animation-delay: -1.7s; }
+.flow-node:nth-child(3) .flow-card { animation-duration: 4.9s; animation-delay: -3.1s; }
+.flow-node:nth-child(4) .flow-card { animation-duration: 5.7s; animation-delay: -0.9s; }
+.flow-node:nth-child(5) .flow-card { animation-duration: 4.3s; animation-delay: -2.4s; }
+.flow-node:nth-child(6) .flow-card { animation-duration: 5.1s; animation-delay: -1.2s; }
+
+/* Área de la imagen. Las imágenes ya vienen recortadas a su contenido,
+   así que el texto queda pegado a la ilustración sin relleno intermedio. */
+.flow-media {
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+/* Envoltura ajustada a la imagen para anclar el número a su esquina */
+.flow-imgwrap {
+  position: relative;
+  display: inline-flex;
+}
+
+/* Imagen sola, sin caja — es el elemento visual protagonista */
+.flow-img {
+  height: 170px;
+  width: auto;
+  display: block;
+}
+
+.flow-num {
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--blue-600);
+  color: #fff;
+  font-family: var(--font-secondary);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  border: 2px solid var(--bg-white);
+  box-shadow: 0 2px 8px rgba(7, 89, 252, 0.35);
+}
+
+.flow-title {
+  font-family: var(--font-primary);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--text-dark);
+}
+
+.flow-desc {
+  font-family: var(--font-primary);
+  font-size: 15px;
+  font-weight: var(--weight-body);
+  line-height: 1.55;
+  color: var(--text-medium);
+  margin-top: 7px;
+}
+
+/* --- Conectores de la serpentina (líneas estáticas, simbólicas) --- */
+
+/* Horizontales: a la altura del centro de la imagen (padding-top 24 +
+   media 150/2 = 99px), cruzan el gap hacia la columna vecina.
+   Fila superior 1→2 y 2→3; fila inferior 5→4 y 6→5. */
+.flow-node:nth-child(1)::after,
+.flow-node:nth-child(2)::after,
+.flow-node:nth-child(5)::after,
+.flow-node:nth-child(6)::after {
+  content: "";
+  position: absolute;
+  top: 96px;            /* centro de la línea (4px de grosor) a 99px */
+  left: 100%;
+  width: 140px;         /* = column-gap */
+  height: 6px;
+  /* Patrón de rayitas: un guión recto con extremos redondeados que se
+     repite horizontalmente. El color va embebido (#B8D5FF = --blue-200). */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='6'%3E%3Cline x1='3' y1='3' x2='13' y2='3' stroke='%23B8D5FF' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-position: left center;
+  background-size: 22px 6px;
+}
+
+/* Vertical: baja por la columna derecha del paso 3 al paso 4. */
+.flow-node:nth-child(3)::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 6px;
+  height: 56px;         /* = row-gap */
+  margin-left: -3px;    /* centra el grosor de 6px */
+  /* Mismo patrón de rayitas, en vertical. */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='22'%3E%3Cline x1='3' y1='3' x2='3' y2='13' stroke='%23B8D5FF' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: repeat-y;
+  background-position: center top;
+  background-size: 6px 22px;
+}
+
+/* ─── Conectores animados: resaltado que viaja por el camino 1→2→3→↓→4→5→6 ─── */
+
+@keyframes conn-lr {
+  /* Izquierda → Derecha. Sweep = 0.7s / ciclo 4.8s = 14.6% del ciclo. */
+  0%    { background-position: -80px 0; }
+  14.6% { background-position: 140px 0; }
+  14.7% { background-position: -80px 0; }
+  100%  { background-position: -80px 0; }
+}
+
+@keyframes conn-rl {
+  /* Derecha → Izquierda (fila inferior 4→5→6). */
+  0%    { background-position: 140px 0; }
+  14.6% { background-position: -80px 0; }
+  14.7% { background-position: 140px 0; }
+  100%  { background-position: 140px 0; }
+}
+
+@keyframes conn-tb {
+  /* Arriba → Abajo (vertical 3→4, 56px). Sweep = 0.5s / 4.8s = 10.4%.
+     Más corto que el horizontal porque la distancia también lo es. */
+  0%    { background-position: 0 -40px; }
+  10.4% { background-position: 0 56px;  }
+  10.5% { background-position: 0 -40px; }
+  100%  { background-position: 0 -40px; }
+}
+
+/* Versiones pequeñas para el breakpoint 1200px donde el gap es 56px */
+@keyframes conn-lr-sm {
+  0%    { background-position: -30px 0; }
+  14.6% { background-position:  56px 0; }
+  14.7% { background-position: -30px 0; }
+  100%  { background-position: -30px 0; }
+}
+
+@keyframes conn-rl-sm {
+  0%    { background-position:  56px 0; }
+  14.6% { background-position: -30px 0; }
+  14.7% { background-position:  56px 0; }
+  100%  { background-position:  56px 0; }
+}
+
+.conn-glow {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+  border-radius: 3px;
+}
+
+/* Overlay horizontal: mismo top/left que el ::after del nodo */
+.conn-glow-h {
+  top: 96px;
+  left: 100%;
+  width: 140px;   /* = column-gap */
+  height: 6px;
+  background: linear-gradient(to right,
+    transparent                  0%,
+    rgba(7, 89, 252, 0.35)      20%,
+    rgba(7, 89, 252, 0.95)      50%,
+    rgba(7, 89, 252, 0.35)      80%,
+    transparent                 100%
+  );
+  background-size: 80px 100%;
+  background-repeat: no-repeat;
+}
+
+/* Overlay vertical: mismo top/left que el ::before del nodo 3 */
+.conn-glow-v {
+  top: 100%;
+  left: 50%;
+  margin-left: -3px;
+  width: 6px;
+  height: 56px;   /* = row-gap */
+  background: linear-gradient(to bottom,
+    transparent                  0%,
+    rgba(7, 89, 252, 0.35)      20%,
+    rgba(7, 89, 252, 0.95)      50%,
+    rgba(7, 89, 252, 0.35)      80%,
+    transparent                 100%
+  );
+  background-size: 100% 40px;
+  background-repeat: no-repeat;
+}
+
+/* Secuenciado (ciclo 4.8s = 4.5s activos + 0.3s pausa = misma pausa que entre conectores).
+   Delay negativo = ya lleva N segundos corriendo al cargar → -(ciclo - t_inicio).
+   conn1: t=0s   → delay  0s
+   conn2: t=1.0s → delay -(4.8-1.0) = -3.8s
+   conn3: t=2.0s → delay -(4.8-2.0) = -2.8s
+   conn4: t=2.8s → delay -(4.8-2.8) = -2.0s
+   conn5: t=3.8s → delay -(4.8-3.8) = -1.0s  */
+.conn-glow-1 { animation: conn-lr 4.8s linear infinite  0.0s; }
+.conn-glow-2 { animation: conn-lr 4.8s linear infinite -3.8s; }
+.conn-glow-3 { animation: conn-tb 4.8s linear infinite -2.8s; }
+.conn-glow-4 { animation: conn-rl 4.8s linear infinite -2.0s; }
+.conn-glow-5 { animation: conn-rl 4.8s linear infinite -1.0s; }
+
+/* =============================================
+   HERO — RESPONSIVE
+   ============================================= */
+
+/* Pantallas medianas: las tarjetas anchas no caben de a 3, se compactan.
+   Gap fijo más chico y se iguala el ancho de las líneas horizontales. */
+@media (max-width: 1200px) {
+
+  .flow-grid {
+    grid-template-columns: repeat(3, minmax(0, 190px));
+    column-gap: 56px;
+  }
+
+  .flow-node:nth-child(1)::after,
+  .flow-node:nth-child(2)::after,
+  .flow-node:nth-child(5)::after,
+  .flow-node:nth-child(6)::after {
+    width: 56px;        /* = nuevo column-gap */
+  }
+
+  .conn-glow-h {
+    width: 56px;
+    background-size: 30px 100%;
+  }
+  .conn-glow-1 { animation-name: conn-lr-sm; }
+  .conn-glow-2 { animation-name: conn-lr-sm; }
+  .conn-glow-4 { animation-name: conn-rl-sm; }
+  .conn-glow-5 { animation-name: conn-rl-sm; }
+}
+
+/* Tablet: la fila superior se apila — texto centrado arriba, imagen debajo */
+@media (max-width: 1024px) {
+
+  .hero-top {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .hero-content {
+    align-items: center;
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .hero-image {
+    order: 2;   /* imagen debajo del texto */
+  }
+
+  .hero-image-img {
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .hero-inner {
+    padding: 56px 20px 72px;
+  }
+
+  /* El tamaño del headline lo maneja el clamp(); solo ajustamos el subtítulo */
+  .hero-subtitle {
+    font-size: 16px;
+    margin-top: 18px;
+  }
+
+  .hero-ctas {
+    margin-top: 26px;
+  }
+
+  .hero-visual {
+    margin-top: 44px;
+  }
+
+
+  .flow-label {
+    margin-bottom: 44px;
+  }
+
+  /* Las tarjetas se apilan en una sola columna (paso 1 → 6 en orden) */
+  .flow-grid {
+    grid-template-columns: minmax(0, 300px);
+    row-gap: 24px;
+  }
+
+  .flow-node:nth-child(1),
+  .flow-node:nth-child(2),
+  .flow-node:nth-child(3),
+  .flow-node:nth-child(4),
+  .flow-node:nth-child(5),
+  .flow-node:nth-child(6) {
+    grid-area: auto;
+  }
+
+  /* Sin conectores al apilar en vertical */
+  .flow-node::after,
+  .flow-node::before,
+  .conn-glow {
+    display: none;
+  }
+
+  /* CTAs apilados a ancho completo */
+  .hero-ctas {
+    flex-direction: column;
+    align-self: stretch;
+    gap: 12px;
+  }
+
+  .hero-ctas .btn-primary,
+  .hero-ctas .btn-outline {
+    width: 100%;
+  }
+}
+
+/* =============================================
+   ZONA OSCURA — Ticker + El Problema + Beneficios
+   Un solo lienzo #070714 continuo, sin líneas divisoras internas.
+   ============================================= */
+
+.dark-zone {
+  position: relative;
+  background:
+    radial-gradient(ellipse 700px 500px at 12% 18%,  rgba(7, 89, 252, 0.13) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 380px at 88% 55%,  rgba(7, 89, 252, 0.09) 0%, transparent 70%),
+    radial-gradient(ellipse 420px 320px at 50% 85%,  rgba(80, 40, 220, 0.07) 0%, transparent 70%),
+    var(--bg-dark);
+}
+
+/* Desintegración de entrada: el oscuro no entra con una línea ni con un
+   degradado plano, sino como grano de puntos que se disuelve hacia el Hero
+   blanco (mismo lenguaje de puntos del fondo). Abajo los puntos se funden en
+   el negro sólido; arriba se desvanecen en partículas sueltas sobre el blanco.
+   Vive en el aire del padding del Hero (pointer-events: none, no bloquea nada). */
+.dark-zone::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -74px;
+  height: 74px;
+  /* Capa 1: grano de puntos oscuros (la "desintegración").
+     Capa 2: fundido suave a negro sólido en el tramo inferior. */
+  background-image:
+    radial-gradient(circle, var(--bg-dark) 1.3px, transparent 1.7px),
+    linear-gradient(to bottom,
+      rgba(7, 7, 20, 0) 0%,
+      rgba(7, 7, 20, 0) 40%,
+      var(--bg-dark) 100%);
+  background-size: 12px 12px, 100% 100%;
+  /* La máscara hace que el grano nazca de la nada arriba (partículas sueltas)
+     y se vuelva sólido abajo — el efecto de desintegrarse/recomponerse. */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 52%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 52%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Desintegración de salida: espejo del ::before pero invertido.
+   El oscuro se disuelve en partículas que se desvanecen hacia el blanco de abajo. */
+.dark-zone::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -74px;
+  height: 74px;
+  background-image:
+    radial-gradient(circle, var(--bg-dark) 1.3px, transparent 1.7px),
+    linear-gradient(to bottom,
+      var(--bg-dark) 0%,
+      rgba(7, 7, 20, 0) 60%,
+      rgba(7, 7, 20, 0) 100%);
+  background-size: 12px 12px, 100% 100%;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 52%);
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 52%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* =============================================
+   BLOQUE 2 — EL PROBLEMA
+   ============================================= */
+
+.problema {
+  /* Hereda el fondo oscuro de .dark-zone */
+  background: transparent;
+  padding: 20px 0 96px;
+}
+
+.problema-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* --- Header: título grande (izq) + subtítulo (der) --- */
+.problema-header {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  align-items: end;
+  column-gap: 48px;
+  margin-bottom: 52px;
+}
+
+.problema-heading {
+  font-family: var(--font-primary);
+  font-size: var(--text-h1);
+  font-weight: var(--weight-h1);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  text-wrap: balance;
+  max-width: 16ch;
+}
+
+.problema-subheading {
+  font-family: var(--font-primary);
+  font-size: var(--text-body);
+  font-weight: var(--weight-body);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.66);
+  text-align: right;
+}
+
+/* Resaltado tipo marcador en el subtítulo — mismo azul que los widgets */
+.problema-subheading .hl {
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  padding: 0.06em 0.2em;
+  border-radius: 4px;
+  background: var(--blue-200);
+  color: var(--text-dark);
+}
+
+/* --- Rejilla 2×2 --- */
+.problema-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+/* --- Card: texto (izq) + ilustración (der), flotante --- */
+.problema-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 20px;
+  border-radius: 26px;
+  padding: 30px 18px 30px 32px;
+  animation: float-card 5s ease-in-out infinite;
+  transition: scale 0.18s ease, box-shadow 0.25s ease;
+  will-change: transform;
+}
+
+/* La utilidad .js .animate-on-scroll (main.css) tiene mayor especificidad y
+   pisaba el transition de .problema-card, dejando el `scale` del hover SIN
+   transición (saltaba de golpe). Esta regla recupera el control: mantiene el
+   reveal de entrada (opacity/transform) y añade el mismo `scale`/`box-shadow`
+   suave del diagrama (.flow-card).
+   Se usa longhand para poder dar delay SOLO al reveal: el escalonado de
+   aparición vive en transition-delay de opacity/transform, mientras scale y
+   box-shadow (el hover) tienen delay 0 → el hover responde al instante. */
+.js .problema-card.animate-on-scroll {
+  transition-property: opacity, transform, scale, box-shadow;
+  transition-duration: 0.6s, 0.6s, 0.18s, 0.25s;
+  transition-timing-function: ease-out, ease-out, ease, ease;
+  transition-delay: 0s, 0s, 0s, 0s;
+}
+
+/* Escalonado de aparición (antes inline en el HTML). Solo retrasa el reveal
+   (opacity/transform); el hover (scale/box-shadow) queda siempre en 0s. */
+.js .problema-grid .problema-card:nth-child(2).animate-on-scroll { transition-delay: 0.1s, 0.1s, 0s, 0s; }
+.js .problema-grid .problema-card:nth-child(3).animate-on-scroll { transition-delay: 0.2s, 0.2s, 0s, 0s; }
+.js .problema-grid .problema-card:nth-child(4).animate-on-scroll { transition-delay: 0.3s, 0.3s, 0s, 0s; }
+
+/* Ritmos distintos para que las 4 no floten en sincronía */
+.problema-grid .problema-card:nth-child(1) { animation-duration: 4.6s; animation-delay: -0.4s; }
+.problema-grid .problema-card:nth-child(2) { animation-duration: 5.4s; animation-delay: -2.1s; }
+.problema-grid .problema-card:nth-child(3) { animation-duration: 5.7s; animation-delay: -1.0s; }
+.problema-grid .problema-card:nth-child(4) { animation-duration: 4.3s; animation-delay: -2.8s; }
+
+.problema-card:hover {
+  scale: 1.04;
+  z-index: 2;
+  animation-play-state: paused;
+}
+
+/* Variante clara (cards 1 y 4) — la card blanca "emite" luz hacia el lienzo oscuro:
+   outer glow suave en el borde + neumorfismo de profundidad. */
+.problema-card--light {
+  background: #ffffff;
+  box-shadow:
+    16px 16px 34px rgba(0, 0, 0, 0.45),
+    -13px -13px 30px rgba(255, 255, 255, 0.09),
+    0 0 18px rgba(255, 255, 255, 0.20),
+    0 0 42px rgba(255, 255, 255, 0.07);
+}
+
+.problema-card--light:hover {
+  box-shadow:
+    21px 21px 44px rgba(0, 0, 0, 0.52),
+    -15px -15px 34px rgba(255, 255, 255, 0.13),
+    0 0 24px rgba(255, 255, 255, 0.28),
+    0 0 56px rgba(255, 255, 255, 0.10);
+}
+
+/* Variante oscura (cards 2 y 3) — rim light: borde iluminado desde adentro.
+   inset da la sensación de que la luz bordea el interior de la card. */
+.problema-card--dark {
+  background: #212121;
+  box-shadow:
+    16px 16px 34px rgba(0, 0, 0, 0.6),
+    -13px -13px 30px rgba(255, 255, 255, 0.055),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.11),
+    inset 0 1px 1px rgba(255, 255, 255, 0.18);
+}
+
+.problema-card--dark:hover {
+  box-shadow:
+    21px 21px 44px rgba(0, 0, 0, 0.7),
+    -15px -15px 34px rgba(255, 255, 255, 0.075),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.18),
+    inset 0 1px 1px rgba(255, 255, 255, 0.26);
+}
+
+/* --- Texto --- */
+.problema-text {
+  min-width: 0;
+}
+
+.problema-title {
+  font-family: var(--font-primary);
+  font-size: 27px;
+  font-weight: 800;
+  line-height: 1.22;
+  letter-spacing: -0.025em;
+}
+
+.problema-card--light .problema-title {
+  color: var(--text-dark);
+}
+
+.problema-card--dark .problema-title {
+  color: #ffffff;
+}
+
+.problema-desc {
+  font-family: var(--font-primary);
+  font-size: 14.5px;
+  font-weight: var(--weight-body);
+  line-height: 1.55;
+  margin-top: 14px;
+}
+
+.problema-card--light .problema-desc { color: var(--text-medium); }
+.problema-card--dark  .problema-desc { color: rgba(255, 255, 255, 0.72); }
+
+/* --- Ilustración --- */
+.problema-media {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;   /* ocupa toda la altura de la card */
+}
+
+.problema-img {
+  height: 175px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  transform: scale(1.18);
+  transform-origin: center center;
+}
+
+/* Cards oscuras: las ilustraciones son RGBA (fondo transparente nativo),
+   se renderizan directamente sobre el #212121 sin ningún chip ni blend mode. */
+.problema-card--dark .problema-img {
+  height: 175px;
+}
+
+/* =============================================
+   BLOQUE 2 — RESPONSIVE
+   ============================================= */
+
+@media (max-width: 1024px) {
+
+  .problema {
+    padding: 24px 0 80px;
+  }
+
+  .problema-header {
+    grid-template-columns: 1fr;
+    align-items: start;
+    row-gap: 14px;
+    margin-bottom: 40px;
+  }
+
+  .problema-heading {
+    max-width: 22ch;
+  }
+
+  .problema-subheading {
+    text-align: left;
+  }
+
+  .problema-title {
+    font-size: 21px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .problema-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* Texto arriba, ilustración centrada debajo */
+  .problema-card {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: 22px;
+    padding: 28px 24px;
+    /* La flotación se detiene al apilar para no marear en pantalla pequeña */
+    animation: none;
+  }
+
+  .problema-media {
+    order: 2;
+  }
+
+  .problema-text {
+    order: 1;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .problema {
+    padding: 16px 0 64px;
+  }
+
+  .problema-heading {
+    font-size: 30px;
+  }
+
+  .problema-img {
+    height: 118px;
+  }
+
+  .problema-card--dark .problema-img {
+    height: 104px;
+  }
+}
+
+/* =============================================
+   BLOQUE 3 — BENEFICIOS
+   ============================================= */
+
+.beneficios {
+  /* Sin fondo propio: el patrón de puntos del body continúa sin cortes. */
+  background: transparent;
+  padding: 40px 0 104px;
+}
+
+.beneficios-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* --- Header: solo el título grande --- */
+.beneficios-header {
+  margin-bottom: 28px;
+}
+
+.beneficios-heading {
+  font-family: var(--font-primary);
+  font-size: var(--text-h1);
+  font-weight: var(--weight-h1);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.beneficios-brand {
+  color: var(--blue-600);
+  white-space: nowrap;
+}
+
+.beneficios-subheading {
+  font-family: var(--font-primary);
+  font-size: var(--text-body);
+  font-weight: var(--weight-body);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.66);
+  text-align: right;
+  padding-right: 4px;
+}
+
+/* Resaltado tipo marcador en el subtítulo — mismo azul que los widgets */
+.beneficios-subheading .hl {
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  padding: 0.06em 0.2em;
+  border-radius: 4px;
+  background: var(--blue-200);
+  color: var(--text-dark);
+}
+
+/* --- Grupos: etiqueta de fila + grid de 4 cards --- */
+.beneficios-group {
+  margin-top: 40px;
+}
+
+.beneficios-group:first-of-type {
+  margin-top: 0;
+}
+
+/* Cabecera del grupo: etiqueta (izq) + subtítulo (der), alineados por abajo */
+.beneficios-group-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  margin-bottom: 22px;
+}
+
+/* Grupo proveedores: etiqueta empujada a la derecha */
+.beneficios-group--right .beneficios-group-head {
+  justify-content: flex-end;
+}
+
+.beneficios-group-label {
+  display: inline-block;
+  font-family: var(--font-secondary);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.78);
+  padding-left: 4px;
+}
+
+.beneficios-group--right .beneficios-group-label {
+  padding-left: 0;
+  padding-right: 4px;
+}
+
+.beneficios-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+/* --- Card pequeña vertical (ícono arriba → título → descripción) --- */
+.benefit-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 16px 22px;
+  min-height: 205px;
+  animation: float-card 5s ease-in-out infinite;   /* reutiliza keyframe existente */
+  transition: scale 0.2s ease, box-shadow 0.25s ease;
+  will-change: transform;
+  /* mismo glow blanco + neumorfismo de las cards claras de El Problema */
+  box-shadow:
+    16px 16px 34px rgba(0, 0, 0, 0.45),
+    -13px -13px 30px rgba(255, 255, 255, 0.09),
+    0 0 18px rgba(255, 255, 255, 0.20),
+    0 0 42px rgba(255, 255, 255, 0.07);
+}
+
+.benefit-card:hover {
+  scale: 1.02;   /* cards pequeñas → scale algo mayor que las grandes */
+  z-index: 2;
+  animation-play-state: paused;
+  box-shadow:
+    21px 21px 44px rgba(0, 0, 0, 0.52),
+    -15px -15px 34px rgba(255, 255, 255, 0.13),
+    0 0 24px rgba(255, 255, 255, 0.28),
+    0 0 56px rgba(255, 255, 255, 0.10);
+}
+
+/* Ritmos de flotación desfasados por posición (no todas sincronizadas) */
+.benefit-card:nth-child(1) { animation-duration: 4.6s; animation-delay: -0.4s; }
+.benefit-card:nth-child(2) { animation-duration: 5.4s; animation-delay: -2.1s; }
+.benefit-card:nth-child(3) { animation-duration: 5.7s; animation-delay: -1.0s; }
+.benefit-card:nth-child(4) { animation-duration: 4.3s; animation-delay: -2.8s; }
+
+/* --- Ícono en chip --- */
+.benefit-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: var(--blue-50);
+  color: var(--blue-600);
+  margin-bottom: 12px;
+}
+
+.benefit-icon svg {
+  width: 30px;
+  height: 30px;
+  display: block;
+}
+
+/* --- Texto --- */
+.benefit-card-title {
+  font-family: var(--font-primary);
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+}
+
+.benefit-card-desc {
+  font-family: var(--font-primary);
+  font-size: 15px;
+  font-weight: var(--weight-body);
+  line-height: 1.55;
+  color: var(--text-medium);
+}
+
+/* =============================================
+   BLOQUE 3 — RESPONSIVE
+   ============================================= */
+
+@media (max-width: 1024px) {
+
+  .beneficios {
+    padding: 24px 0 80px;
+  }
+
+  .beneficios-header {
+    margin-bottom: 24px;
+  }
+
+  .beneficios-row {
+    grid-template-columns: repeat(2, 1fr);   /* 4 cards → 2×2 por grupo */
+    gap: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .beneficios-group {
+    margin-top: 32px;
+  }
+
+  /* Cabecera apilada: etiqueta arriba, subtítulo debajo, alineados a la izquierda */
+  .beneficios-group-head,
+  .beneficios-group--right .beneficios-group-head {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  .beneficios-subheading {
+    text-align: left;
+    padding-right: 0;
+  }
+
+  .beneficios-row {
+    grid-template-columns: 1fr;   /* una columna apilada */
+    gap: 16px;
+  }
+
+  /* Sin flotación al apilar en vertical */
+  .benefit-card {
+    animation: none;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .beneficios {
+    padding: 16px 0 64px;
+  }
+
+  .beneficios-heading {
+    font-size: 30px;
+  }
+
+  .benefit-card {
+    padding: 22px 20px;
+  }
+
+  .benefit-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .benefit-icon svg {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+/* =============================================
+   TICKER — FRASES EN MOVIMIENTO
+   ============================================= */
+
+.ticker {
+  background: transparent;   /* hereda el lienzo oscuro de .dark-zone */
+  padding: 56px 0 28px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ticker-row {
+  overflow: hidden;
+}
+
+.ticker-track {
+  display: flex;
+  gap: 12px;
+  width: max-content;   /* se expande para contener todos los pills en una fila */
+}
+
+.ticker-row--left  .ticker-track { animation: ticker-left  32s linear infinite; }
+.ticker-row--right .ticker-track { animation: ticker-right 26s linear infinite; }
+
+/* Al pasar el mouse sobre la fila, la pista se detiene */
+.ticker-row:hover .ticker-track {
+  animation-play-state: paused;
+}
+
+@keyframes ticker-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-25%); }
+}
+
+@keyframes ticker-right {
+  from { transform: translateX(-25%); }
+  to   { transform: translateX(0); }
+}
+
+.ticker-pill {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  padding: 10px 22px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-family: var(--font-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #ffffff;
+  cursor: default;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.ticker-pill:hover {
+  background: var(--blue-600);
+  border-color: var(--blue-600);
+}
+
+/* =============================================
+   BLOQUE 4 — FORMULARIOS DE REGISTRO
+   ============================================= */
+
+.formularios {
+  position: relative;
+  overflow: hidden;
+  background: transparent;   /* el patrón de puntos del body continúa en blanco */
+  padding: 184px 0 96px;
+}
+
+/* Íconos gigantes translúcidos en el fondo de la sección */
+.formularios-bg-icon {
+  position: absolute;
+  top: 50%;
+  width: 460px;
+  height: 460px;
+  color: var(--blue-600);
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.formularios-bg-icon--left {
+  left: -90px;
+  transform: translateY(-40%) rotate(-8deg);
+}
+
+.formularios-bg-icon--right {
+  right: -90px;
+  transform: translateY(-40%) rotate(8deg);
+}
+
+/* En pantallas donde no hay espacio lateral, se ocultan */
+@media (max-width: 1280px) {
+  .formularios-bg-icon {
+    display: none;
+  }
+}
+
+.formularios-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* --- Cabecera centrada --- */
+.formularios-header {
+  text-align: center;
+  max-width: 620px;
+  margin: 0 auto 44px;
+}
+
+.formularios-heading {
+  font-family: var(--font-primary);
+  font-size: var(--text-h1);
+  font-weight: var(--weight-h1);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--text-dark);
+}
+
+.formularios-brand {
+  color: var(--blue-600);
+}
+
+.formularios-subheading {
+  font-family: var(--font-primary);
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--text-medium);
+  margin-top: 14px;
+}
+
+/* --- Selector: dos cards de acceso --- */
+.acceso-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 860px;
+  margin: 0 auto 52px;
+}
+
+.acceso-card {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: var(--bg-white);
+  border: 1.5px solid var(--border);
+  border-radius: 22px;
+  padding: 32px 30px;
+  box-shadow: 0 10px 30px rgba(10, 10, 20, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.25s ease, border-color 0.2s ease;
+}
+
+.acceso-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(7, 89, 252, 0.12);
+  border-color: var(--border-hover);
+}
+
+.acceso-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 15px;
+  background: var(--blue-50);
+  color: var(--blue-600);
+  margin-bottom: 20px;
+}
+
+.acceso-icon svg {
+  width: 28px;
+  height: 28px;
+  display: block;
+}
+
+.acceso-title {
+  font-family: var(--font-primary);
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+
+.acceso-sub {
+  font-family: var(--font-primary);
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--text-medium);
+  margin-bottom: 24px;
+}
+
+/* --- Botón grande de acceso (efecto ripple en hover) --- */
+.acceso-btn {
+  position: relative;
+  z-index: 0;
+  margin-top: auto;        /* ancla el botón al fondo de la card */
+  align-self: stretch;
+  font-family: var(--font-primary);
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  padding: 15px 32px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.acceso-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 999px;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.acceso-btn:hover {
+  transform: translateY(-3px);
+}
+
+.acceso-btn:hover::after {
+  transform: scaleX(1.35) scaleY(1.55);
+  opacity: 0;
+}
+
+.acceso-btn:active {
+  transform: translateY(-1px);
+}
+
+.acceso-btn--blue {
+  background: var(--blue-600);
+  box-shadow: 0 8px 20px rgba(7, 89, 252, 0.30);
+}
+.acceso-btn--blue::after { background: var(--blue-600); }
+
+.acceso-btn--dark {
+  background: #231F20;
+  box-shadow: 0 8px 20px rgba(10, 10, 20, 0.28);
+}
+.acceso-btn--dark::after { background: #231F20; }
+
+/* Indicador del perfil activo */
+.acceso-btn.is-active {
+  box-shadow: 0 0 0 4px rgba(7, 89, 252, 0.18), 0 8px 20px rgba(7, 89, 252, 0.30);
+}
+.acceso-btn--dark.is-active {
+  box-shadow: 0 0 0 4px rgba(35, 31, 32, 0.20), 0 8px 20px rgba(10, 10, 20, 0.28);
+}
+
+/* =============================================
+   MODAL — ventana emergente de formularios
+   ============================================= */
+
+.ts-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.ts-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.ts-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(7, 7, 20, 0.55);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.ts-modal-dialog {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  background: var(--bg-white);
+  border-radius: 20px;
+  box-shadow: 0 24px 64px rgba(7, 7, 20, 0.35);
+  transform: translateY(16px) scale(0.98);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-overflow-scrolling: touch;
+}
+
+.ts-modal.is-open .ts-modal-dialog {
+  transform: translateY(0) scale(1);
+}
+
+.ts-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  background: var(--bg-alt);
+  color: var(--text-medium);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.ts-modal-close:hover {
+  background: var(--blue-50);
+  color: var(--text-dark);
+  transform: rotate(90deg);
+}
+
+/* Bloquea el scroll del fondo cuando el modal está abierto */
+body.ts-modal-lock {
+  overflow: hidden;
+}
+
+/* =============================================
+   PANTALLA DE ÉXITO (check animado)
+   ============================================= */
+
+.ts-success-screen {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 60px 38px 56px;
+  text-align: center;
+}
+
+.ts-success-screen.is-visible {
+  display: flex;
+}
+
+/* Círculo verde que hace "pop" */
+.ts-success-circle {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #22c55e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: success-pop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes success-pop {
+  from { transform: scale(0); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+/* Check dibujado con stroke */
+.ts-success-circle svg {
+  overflow: visible;
+}
+
+.ts-check-path {
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+  animation: draw-check 0.3s ease-out 0.25s forwards;
+}
+
+@keyframes draw-check {
+  to { stroke-dashoffset: 0; }
+}
+
+.ts-success-title {
+  font-family: var(--font-primary);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0;
+  animation: success-fade-up 0.3s ease-out 0.3s both;
+}
+
+.ts-success-sub {
+  font-size: 15px;
+  color: var(--text-medium);
+  margin: 0;
+  animation: success-fade-up 0.3s ease-out 0.4s both;
+}
+
+@keyframes success-fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* =============================================
+   FORMULARIO (tarjeta blanca, adaptado)
+   ============================================= */
+
+.form-wrap {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.ts-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  background: var(--bg-white);
+  border: 1.5px solid var(--border);
+  border-radius: 24px;
+  padding: 36px 34px;
+  box-shadow: 0 18px 50px rgba(10, 10, 20, 0.08);
+}
+
+/* Dentro del modal, el diálogo ya es la tarjeta: el form no repite borde/sombra */
+.ts-modal .ts-form {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 44px 38px 38px;
+}
+
+.ts-form.is-hidden {
+  display: none;
+}
+
+/* Aparición suave al alternar */
+.ts-form:not(.is-hidden) {
+  animation: ts-form-in 0.35s ease-out;
+}
+
+@keyframes ts-form-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Título con punto pulsante --- */
+.ts-form-title {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 28px;
+  font-family: var(--font-primary);
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--blue-600);
+}
+
+.ts-form-title::before,
+.ts-form-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--blue-600);
+}
+
+.ts-form-title::after {
+  animation: ts-pulse 1.4s ease-out infinite;
+}
+
+@keyframes ts-pulse {
+  from { transform: scale(0.9); opacity: 1; }
+  to   { transform: scale(2);   opacity: 0; }
+}
+
+.ts-form-message {
+  font-family: var(--font-primary);
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--text-medium);
+  margin-top: -8px;
+}
+
+/* --- Inputs flotantes (nombre / email) --- */
+.ts-flex {
+  display: flex;
+  gap: 14px;
+}
+
+.float-field {
+  position: relative;
+  display: block;
+  flex: 1;
+}
+
+.float-input {
+  width: 100%;
+  padding: 16px 12px 10px;
+  font-family: var(--font-primary);
+  font-size: 15px;
+  color: var(--text-dark);
+  background: var(--bg-white);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  outline: 0;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.float-input + span {
+  position: absolute;
+  left: 13px;
+  top: 15px;
+  font-family: var(--font-primary);
+  font-size: 0.95em;
+  color: var(--text-muted);
+  pointer-events: none;
+  transition: 0.2s ease;
+}
+
+/* Etiqueta sube y encoge al enfocar o cuando hay contenido válido */
+.float-input:focus + span,
+.float-input:not(:placeholder-shown) + span {
+  top: 6px;
+  font-size: 0.72em;
+  font-weight: 600;
+  color: var(--blue-600);
+}
+
+.float-input:focus {
+  border-color: var(--blue-600);
+  box-shadow: 0 0 0 3px rgba(7, 89, 252, 0.12);
+}
+
+.float-field.has-error .float-input {
+  border-color: #E5484D;
+  box-shadow: 0 0 0 3px rgba(229, 72, 77, 0.12);
+}
+
+/* --- Preguntas con opciones (dropdowns) --- */
+.ts-field {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ts-q {
+  display: block;
+  font-family: var(--font-primary);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+  padding: 0;
+}
+
+.req { color: #E5484D; font-weight: 700; }
+.opt {
+  color: var(--text-muted);
+  font-weight: 400;
+  font-size: 0.85em;
+}
+
+/* --- Custom select dropdown --- */
+.ts-select {
+  position: relative;
+  width: 100%;
+}
+
+.ts-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 13px 16px;
+  background: var(--bg-white);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-family: var(--font-primary);
+  font-size: 15px;
+  color: var(--text-muted);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  gap: 10px;
+}
+
+.ts-select-trigger:hover {
+  border-color: var(--border-hover);
+}
+
+.ts-select.is-open .ts-select-trigger,
+.ts-select-trigger:focus-visible {
+  border-color: var(--blue-600);
+  box-shadow: 0 0 0 3px rgba(7, 89, 252, 0.12);
+  outline: none;
+}
+
+.ts-select.has-value .ts-select-trigger {
+  color: var(--text-dark);
+}
+
+.ts-select-label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ts-select-arrow {
+  flex-shrink: 0;
+  color: var(--text-muted);
+  transition: transform 0.2s ease;
+}
+
+.ts-select.is-open .ts-select-arrow {
+  transform: rotate(180deg);
+}
+
+.ts-select-panel {
+  display: none;
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  right: 0;
+  background: var(--bg-white);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(7, 89, 252, 0.10), 0 2px 8px rgba(0, 0, 0, 0.06);
+  z-index: 100;
+  max-height: 228px;
+  overflow-y: auto;
+}
+
+.ts-select.is-open .ts-select-panel {
+  display: block;
+  animation: ts-dropdown-in 0.16s ease-out;
+}
+
+@keyframes ts-dropdown-in {
+  from { opacity: 0; transform: translateY(-5px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.ts-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 14px;
+  cursor: pointer;
+  font-family: var(--font-primary);
+  font-size: 14.5px;
+  color: var(--text-dark);
+  transition: background 0.1s ease;
+  user-select: none;
+}
+
+.ts-option:hover {
+  background: var(--blue-50);
+}
+
+.ts-option:first-child { border-radius: 10px 10px 0 0; }
+.ts-option:last-child  { border-radius: 0 0 10px 10px; }
+.ts-option:only-child  { border-radius: 10px; }
+
+.ts-option input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.ts-option-check {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid #CBD5E0;
+  border-radius: 5px;
+  background: white;
+  position: relative;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.ts-select[data-type="single"] .ts-option-check {
+  border-radius: 50%;
+}
+
+.ts-option input:checked ~ .ts-option-check {
+  background: var(--blue-600);
+  border-color: var(--blue-600);
+}
+
+/* Checkmark para multi-select */
+.ts-select[data-type="multi"] .ts-option input:checked ~ .ts-option-check::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 3px;
+  width: 9px;
+  height: 5px;
+  border-left: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: rotate(-45deg);
+}
+
+/* Punto para single-select */
+.ts-select[data-type="single"] .ts-option input:checked ~ .ts-option-check::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  background: white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.ts-option-text {
+  flex: 1;
+}
+
+/* --- Campo de texto cuando se selecciona "Otro" --- */
+.ts-otro-wrap {
+  margin-top: 8px;
+  animation: ts-dropdown-in 0.18s ease-out;
+}
+
+.ts-otro-input {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-family: var(--font-primary);
+  font-size: 15px;
+  color: var(--text-dark);
+  background: var(--bg-white);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  box-sizing: border-box;
+}
+
+.ts-otro-input::placeholder {
+  color: var(--text-muted);
+}
+
+.ts-otro-input:focus {
+  border-color: var(--blue-600);
+  box-shadow: 0 0 0 3px rgba(7, 89, 252, 0.12);
+}
+
+/* --- Mensajes de error por campo --- */
+.ts-error {
+  display: none;
+  font-family: var(--font-primary);
+  font-size: 13px;
+  color: #E5484D;
+  margin-top: 8px;
+}
+
+.ts-error.is-visible {
+  display: block;
+}
+
+/* --- Botón de envío --- */
+.ts-submit {
+  margin-top: 6px;
+  padding: 16px;
+  border: none;
+  border-radius: 14px;
+  background: var(--blue-600);
+  color: #ffffff;
+  font-family: var(--font-primary);
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ts-submit:hover {
+  background: var(--blue-700);
+  transform: scale(1.01);
+  box-shadow: 0 6px 20px rgba(7, 89, 252, 0.35);
+}
+
+.ts-submit:disabled {
+  opacity: 0.7;
+  cursor: default;
+  transform: none;
+  box-shadow: none;
+}
+
+/* --- Estado de envío (éxito / error) --- */
+.ts-form-status {
+  font-family: var(--font-primary);
+  font-size: 14px;
+  line-height: 1.45;
+  text-align: center;
+  margin: 0;
+}
+
+.ts-form-status.is-success { color: #2B8A3E; }
+.ts-form-status.is-error   { color: #E5484D; }
+
+/* Al enviar con éxito, oculta los campos y deja solo el mensaje */
+.ts-form.is-sent .ts-flex,
+.ts-form.is-sent .ts-field,
+.ts-form.is-sent .ts-submit,
+.ts-form.is-sent .ts-form-message {
+  display: none;
+}
+
+/* =============================================
+   BLOQUE 4 — RESPONSIVE
+   ============================================= */
+
+@media (max-width: 768px) {
+  .formularios {
+    padding: 48px 0 72px;
+  }
+
+  .acceso-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-bottom: 40px;
+  }
+
+  .ts-form {
+    padding: 28px 22px;
+  }
+
+  .ts-flex {
+    flex-direction: column;
+    gap: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .formularios-heading {
+    font-size: 30px;
+  }
+
+  .ts-form-title {
+    font-size: 23px;
+  }
+}
+
+/* =============================================
+   BLOQUE 5 — FOOTER
+   Mismo lienzo oscuro que la zona de Problemas/Beneficios:
+   --bg-dark sólido + los mismos gradientes radiales azules.
+   ============================================= */
+
+.site-footer {
+  position: relative;
+  background:
+    radial-gradient(ellipse 700px 500px at 12% 18%,  rgba(7, 89, 252, 0.13) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 380px at 88% 55%,  rgba(7, 89, 252, 0.09) 0%, transparent 70%),
+    radial-gradient(ellipse 420px 320px at 50% 85%,  rgba(80, 40, 220, 0.07) 0%, transparent 70%),
+    var(--bg-dark);
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.footer-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 72px 24px 28px;
+}
+
+/* --- Fila superior: marca + columnas --- */
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 48px;
+}
+
+/* --- Marca --- */
+.footer-logo {
+  height: 32px;
+  width: auto;
+}
+
+.footer-tagline {
+  margin-top: 18px;
+  max-width: 320px;
+  font-family: var(--font-primary);
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* --- Columnas de enlaces --- */
+.footer-col-title {
+  font-family: var(--font-primary);
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 18px;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.footer-links a {
+  font-family: var(--font-primary);
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.6);
+  transition: color 0.18s ease;
+}
+
+.footer-links a:hover {
+  color: #ffffff;
+}
+
+/* --- Founder card --- */
+.footer-col-title--founder {
+  margin-bottom: 10px;
+}
+
+.founder-card {
+  display: inline-flex;
+  flex-direction: column;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  width: 160px;
+  margin-left: 0;
+  transition: scale 0.18s ease, box-shadow 0.18s ease;
+}
+
+.founder-card:hover {
+  scale: 1.02;
+}
+
+.founder-photo {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  filter: grayscale(100%) contrast(1.08);
+}
+
+.founder-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 11px 13px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.founder-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.founder-name {
+  font-family: var(--font-primary);
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.founder-role {
+  font-family: var(--font-primary);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+.founder-li-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  background: rgba(7, 89, 252, 0.18);
+  border: 1px solid rgba(7, 89, 252, 0.35);
+  color: var(--blue-600);
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+
+.founder-li-btn:hover {
+  background: rgba(7, 89, 252, 0.32);
+  border-color: var(--blue-600);
+  transform: translateY(-1px);
+}
+
+/* --- Subtítulo secundario de columna (ej. Contacto bajo Síguenos) --- */
+.footer-col-title--sub {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+/* --- Links legales en columna de marca --- */
+.footer-legal {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  width: 72%;
+}
+
+.footer-legal a {
+  font-family: var(--font-primary);
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+  transition: color 0.18s ease;
+}
+
+.footer-legal a:hover {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* --- Email bajo "Contacto" --- */
+.footer-email-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 0;
+  font-family: var(--font-primary);
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+  transition: color 0.18s ease;
+  text-decoration: none;
+}
+
+.footer-email-link:hover {
+  color: #ffffff;
+}
+
+/* --- Social --- */
+.footer-social {
+  display: flex;
+  gap: 12px;
+}
+
+.footer-social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: rgba(255, 255, 255, 0.72);
+  transition: color 0.18s ease, border-color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+}
+
+.footer-social-link:hover {
+  color: #ffffff;
+  border-color: var(--blue-600);
+  background: rgba(7, 89, 252, 0.18);
+  transform: translateY(-2px);
+}
+
+/* --- Barra inferior --- */
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-copy,
+.footer-made {
+  font-family: var(--font-primary);
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0;
+}
+
+/* =============================================
+   FOOTER — RESPONSIVE
+   ============================================= */
+
+@media (max-width: 768px) {
+  .footer-inner {
+    padding: 56px 24px 28px;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px 24px;
+    padding-bottom: 40px;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+
+  .founder-card {
+    max-width: 160px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .founder-card {
+    max-width: 100%;
+    flex-direction: row;
+    border-radius: 12px;
+    align-items: center;
+  }
+
+  .founder-photo {
+    width: 72px;
+    aspect-ratio: 1;
+    object-position: center top;
+    flex-shrink: 0;
+  }
+
+  .founder-info {
+    flex: 1;
+    padding: 12px 14px;
+    background: transparent;
+  }
+}

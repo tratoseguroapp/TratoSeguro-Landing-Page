@@ -1,0 +1,167 @@
+/* =============================================
+   RESET BASE
+   ============================================= */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* clip (no hidden): evita el scroll horizontal SIN convertir <html>/<body>
+     en contenedor de scroll, que rompía el position:sticky de la navbar. */
+  overflow-x: clip;
+}
+
+body {
+  font-family: var(--font-primary);
+  font-size: var(--text-body);
+  color: var(--text-medium);
+  background-color: var(--bg-white);
+  overflow-x: clip;
+  /* Fondo aurora: blobs de color superpuestos (azul + cian + índigo) a baja
+     opacidad crean un ambiente vivo sin robar protagonismo al contenido.
+     Solo los puntos se repiten; los blobs se quedan en el área del hero. */
+  background-image:
+    radial-gradient(ellipse 80% 52% at 50% -4%,  rgba(7,  89, 252, 0.12), transparent 65%),
+    radial-gradient(ellipse 48% 40% at 96%  6%,  rgba(6, 182, 212, 0.10), transparent 68%),
+    radial-gradient(ellipse 44% 36% at  4% 18%,  rgba(7,  89, 252, 0.08), transparent 68%),
+    radial-gradient(ellipse 36% 28% at 72% 58%,  rgba(99, 60, 220, 0.05), transparent 68%),
+    radial-gradient(ellipse 30% 24% at 18% 72%,  rgba(6, 182, 212, 0.04), transparent 68%),
+    radial-gradient(circle, rgba(7, 89, 252, 0.20) 1px, transparent 1px);
+  background-size:
+    100% 1100px,
+    100% 1100px,
+    100% 1100px,
+    100% 1100px,
+    100% 1100px,
+    25px 25px;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, repeat;
+  background-position: top center, top center, top center, top center, top center, top center;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+/* =============================================
+   VARIABLES CSS — COLORES Y TIPOGRAFÍA
+   ============================================= */
+
+:root {
+  /* --- Marca --- */
+  --blue-600:    #0759FC;
+  --blue-700:    #0341C8;
+  --blue-800:    #0230A0;
+  --blue-50:     #EEF4FF;
+  --blue-100:    #DBEAFF;
+  --blue-200:    #B8D5FF;
+
+  /* --- Texto --- */
+  --text-dark:   #0A0A14;
+  --text-medium: #4A5568;
+  --text-muted:  #9AA5B4;
+
+  /* --- Fondos --- */
+  --bg-white:    #FFFFFF;
+  --bg-alt:      #F8FAFF;
+  --bg-dark:     #070714;
+
+  /* --- Bordes --- */
+  --border:       #E2E8F0;
+  --border-hover: #B8D5FF;
+
+  /* --- Tipografía: familias --- */
+  --font-primary:   'Arial Nova', 'DM Sans', Arial, sans-serif;
+  --font-secondary: 'Nunito Sans', 'DM Sans', Arial, sans-serif;
+
+  /* --- Tipografía: escala de tamaños --- */
+  --text-hero:  56px;
+  --text-h1:    40px;
+  --text-h2:    28px;
+  --text-h3:    20px;
+  --text-body:  16px;
+  --text-small: 14px;
+  --text-label: 12px;
+
+  /* --- Tipografía: pesos --- */
+  --weight-hero:  800;
+  --weight-h1:    700;
+  --weight-h2:    700;
+  --weight-h3:    600;
+  --weight-body:  400;
+  --weight-small: 400;
+  --weight-label: 600;
+
+  /* --- Tipografía: line-heights --- */
+  --lh-hero:  1.05;
+  --lh-h1:    1.15;
+  --lh-h2:    1.2;
+  --lh-h3:    1.3;
+  --lh-body:  1.65;
+  --lh-small: 1.5;
+}
+
+/* =============================================
+   ANIMACIONES DE APARICIÓN (reveal)
+   Utilidad reutilizable: cualquier elemento con .animate-on-scroll aparece
+   (fade + subida) al entrar al viewport. Lo activa js/animations.js.
+   Solo se ocultan si hay JS (clase .js en <html>): sin JS la página se ve
+   completa, nunca en blanco.
+   ============================================= */
+
+.js .animate-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.js .animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Variante solo-fade (sin desplazamiento), p. ej. la navbar */
+.js .animate-on-scroll.fade-only {
+  transform: none;
+}
+
+/* =============================================
+   ACCESIBILIDAD — REDUCCIÓN DE MOVIMIENTO
+   ============================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  /* Nada se oculta ni se mueve: todo visible de inmediato */
+  .js .animate-on-scroll {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
