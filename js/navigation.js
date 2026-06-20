@@ -11,15 +11,40 @@
   const toggle = document.getElementById('navbar-toggle');
   const links = document.getElementById('navbar-links');
 
-  /* --- 1. Estado scrolled --- */
+  /* --- 1. Estado scrolled + hide-on-scroll-down (mobile) --- */
   if (navbar) {
-    const SCROLL_THRESHOLD = 8; // px desde el tope antes de activar el borde
+    const SCROLL_THRESHOLD = 8;   // px para activar sombra/fondo
+    const HIDE_AFTER = 90;        // px mínimos antes de empezar a ocultar
+
+    let lastScrollY = window.scrollY;
 
     const updateScrollState = () => {
-      navbar.classList.toggle('is-scrolled', window.scrollY > SCROLL_THRESHOLD);
+      const currentY = window.scrollY;
+      const isMobile = window.innerWidth <= 768;
+
+      // Sombra/fondo al hacer scroll (desktop y mobile)
+      navbar.classList.toggle('is-scrolled', currentY > SCROLL_THRESHOLD);
+
+      // Ocultar al bajar / mostrar al subir (solo mobile)
+      if (isMobile) {
+        if (currentY > lastScrollY && currentY > HIDE_AFTER) {
+          navbar.classList.add('is-hidden');
+          // Cerrar menú hamburguesa si estaba abierto
+          if (links) {
+            links.classList.remove('is-open');
+            if (toggle) toggle.setAttribute('aria-expanded', 'false');
+          }
+        } else if (currentY < lastScrollY) {
+          navbar.classList.remove('is-hidden');
+        }
+      } else {
+        navbar.classList.remove('is-hidden');
+      }
+
+      lastScrollY = currentY;
     };
 
-    updateScrollState(); // estado correcto si la página carga ya desplazada
+    updateScrollState();
     window.addEventListener('scroll', updateScrollState, { passive: true });
   }
 

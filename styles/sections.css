@@ -9,6 +9,7 @@
   z-index: 1000;
   padding: 16px 24px;
   background: transparent;
+  transition: top 0.35s ease;
 }
 
 /* La barra en sí: pill blanca redondeada con sombra suave */
@@ -218,14 +219,24 @@
 @media (max-width: 768px) {
 
   .navbar {
-    padding: 12px 16px;
+    padding: 10px 14px;
+  }
+
+  /* Esconder navbar al bajar, mostrar al subir (controlado por navigation.js) */
+  .navbar.is-hidden {
+    top: -120px;
   }
 
   .navbar-inner {
     /* Volver a flex: en mobile los links salen del flujo (dropdown absoluto) */
     display: flex;
     justify-content: space-between;
-    padding: 10px 12px 10px 20px;
+    min-height: 52px;
+    padding: 8px 10px 8px 16px;
+  }
+
+  .navbar-logo {
+    height: 24px;
   }
 
   /* Mostrar el botón hamburguesa (a la derecha del CTA) */
